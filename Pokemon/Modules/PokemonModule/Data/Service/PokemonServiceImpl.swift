@@ -16,7 +16,7 @@ class PokemonServiceImpl: IPokemonService {
     }
     
     func fetchPokemonsFromNetwork() async throws -> PokemonResponse{
-        let path = "/3/movie/now_playing"
+        let path = "/api/v2/pokemon"
         let request = NetworkRequest(path: path, method: .get)
         do{
             let response = try await networkManager.request(request: request, responseType: PokemonResponse.self)

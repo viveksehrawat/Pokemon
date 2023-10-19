@@ -31,6 +31,7 @@
 		4390CC492AE1593900F76E2A /* PokemonListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390CC482AE1593900F76E2A /* PokemonListViewModel.swift */; };
 		4390CC4B2AE15A5800F76E2A /* PokemonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390CC4A2AE15A5800F76E2A /* PokemonDetailView.swift */; };
 		4390CC4D2AE15A7400F76E2A /* PokemonCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390CC4C2AE15A7400F76E2A /* PokemonCellView.swift */; };
+		4390CC502AE1895100F76E2A /* PokemonSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390CC4F2AE1895100F76E2A /* PokemonSearchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		4390CC482AE1593900F76E2A /* PokemonListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListViewModel.swift; sourceTree = "<group>"; };
 		4390CC4A2AE15A5800F76E2A /* PokemonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailView.swift; sourceTree = "<group>"; };
 		4390CC4C2AE15A7400F76E2A /* PokemonCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonCellView.swift; sourceTree = "<group>"; };
+		4390CC4F2AE1895100F76E2A /* PokemonSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonSearchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -310,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				4390CC4C2AE15A7400F76E2A /* PokemonCellView.swift */,
+				4390CC4F2AE1895100F76E2A /* PokemonSearchView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -452,6 +455,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4390CC502AE1895100F76E2A /* PokemonSearchView.swift in Sources */,
 				4390CC392AE1504400F76E2A /* IPokemonService.swift in Sources */,
 				4390CC2B2AE1427100F76E2A /* PokemonListView.swift in Sources */,
 				4390CC342AE142BF00F76E2A /* NetworkRequest.swift in Sources */,

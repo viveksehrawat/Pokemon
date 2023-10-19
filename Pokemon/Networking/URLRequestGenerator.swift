@@ -8,7 +8,7 @@
 import Foundation
 
 struct Configuration {
-    static let host = "api.themoviedb.org"
+    static let host = "pokeapi.co"
 }
 
 protocol IURLRequestGenerator {
@@ -41,7 +41,6 @@ class URLRequestGenerator: IURLRequestGenerator {
             throw error
         }
     }
-// https://api.themoviedb.org/3/movie/now_playing?api_key=2696829a81b1b5827d515ff121700838
     private func createURL(with endPoint: INetworkRequest) throws -> URL {
         var components = URLComponents()
         components.scheme = "https"

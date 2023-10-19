@@ -14,7 +14,7 @@ struct PokemonDomainListDTO {
 }
 
 // MARK: - Result
-struct Pokemon: Identifiable {
+struct Pokemon: Identifiable, Equatable {
     let id = UUID()
     let name: String
     let url: String

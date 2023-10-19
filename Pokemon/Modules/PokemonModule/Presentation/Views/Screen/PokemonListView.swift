@@ -14,7 +14,6 @@ struct PokemonListView: View {
         //        GridItem(.adaptive(minimum: 150))
         GridItem(.flexible(), spacing: 10),
         GridItem(.flexible(), spacing: 10),
-        GridItem(.flexible(), spacing: 10)
     ]
     
     func test(){
@@ -25,22 +24,28 @@ struct PokemonListView: View {
        
         AsyncContentView(source: viewModel) { pokemons in
             ScrollView{
-                LazyVGrid(columns: adaptiveColumns, spacing: 10){
-                    ForEach(pokemons){ pokemon in
-                        NavigationLink(destination: PokemonDetailView()) {
-                            PokemonCellView(pokemon: pokemon)
-                                .environmentObject(viewModel)
+                VStack(alignment: .leading){
+                    Text("Pokedex")
+                        .font(.system(size: 35))
+                        .bold()
+                    Divider()
+                    Text("Search for any Pokemon that exists on the planet")
+                        .font(.system(size: 16))
+                    PokemonSearchView()
+                        .padding(.bottom, 10)
+                    LazyVGrid(columns: adaptiveColumns, spacing: 10){
+                        ForEach(pokemons){ pokemon in
+                            NavigationLink(destination: PokemonDetailView()) {
+                                PokemonCellView(pokemon: pokemon)
+                                    .environmentObject(viewModel)
+                            }
                         }
                     }
                 }
             }
-            .navigationTitle("Trending Movies")
-            .padding(.horizontal, 10)
+            .scrollIndicators(.hidden)
         }
-        
+        .padding(.horizontal, 20)
+        .background(Color("backgroundColor"))
     }
 }
-
-//#Preview {
-//    PokemonListView()
-//}

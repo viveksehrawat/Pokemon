@@ -25,7 +25,9 @@ struct PokemonCellView: View {
     
     
     private func thumbnailView() -> some View {
-        let thumbURL = URL(string: "https://image.tmdb.org/t/p/w500/\(pokemon.url)")
+        
+        let thumbURL = URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(vm.getPokemonIndex(pokemon: pokemon)).png")
+        
         return AsyncImage(url: thumbURL) { phase in
             switch phase {
             case .empty:
@@ -35,10 +37,10 @@ struct PokemonCellView: View {
                     .resizable()
                     .scaledToFit()
                 
-            case .failure:
-                Image(systemName: "exclamationmark.icloud.fill")
-                    .font(.system(size: 40))
-                    .foregroundColor(.red)
+//            case .failure:
+//                Image(systemName: "exclamationmark.icloud.fill")
+//                    .font(.system(size: 40))
+//                    .foregroundColor(.red)
                 
             @unknown default:
                 EmptyView()

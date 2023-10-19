@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MovieUseCaseImpl: IPokemonUseCase {
+class PokemonUseCaseImpl: IPokemonUseCase {
     
     private let respository: IPokemonRepository
    
