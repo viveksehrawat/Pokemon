@@ -143,7 +143,11 @@
 		43189CBB2AE288DE00B7964E /* DetailComponent */ = {
 			isa = PBXGroup;
 			children = (
+				43189CB92AE25F0400B7964E /* PokemonView.swift */,
 				43189CBC2AE288F400B7964E /* HeaderView.swift */,
+				43189CAF2AE23EB000B7964E /* ItemView.swift */,
+				43189CB12AE240D200B7964E /* StatsView.swift */,
+				43189CB72AE24C9D00B7964E /* PokemonTypeView.swift */,
 				43189CBE2AE28EBB00B7964E /* ImageTextSectionView.swift */,
 			);
 			path = DetailComponent;
@@ -356,13 +360,9 @@
 		4390CC3B2AE153D900F76E2A /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				4390CC4F2AE1895100F76E2A /* PokemonSearchView.swift */,
 				4390CC4C2AE15A7400F76E2A /* PokemonCellView.swift */,
 				43189CBB2AE288DE00B7964E /* DetailComponent */,
-				4390CC4F2AE1895100F76E2A /* PokemonSearchView.swift */,
-				43189CAF2AE23EB000B7964E /* ItemView.swift */,
-				43189CB12AE240D200B7964E /* StatsView.swift */,
-				43189CB72AE24C9D00B7964E /* PokemonTypeView.swift */,
-				43189CB92AE25F0400B7964E /* PokemonView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";

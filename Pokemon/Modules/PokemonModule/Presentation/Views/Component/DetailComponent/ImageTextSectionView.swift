@@ -20,10 +20,12 @@ struct ImageTextSectionView: View {
                         .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
                         .foregroundColor(.black)
                 )
+                .padding(.leading,1)
             Spacer(minLength: 10)
             Text("This is Pokemon Spits fire that is hot enough to melt Known to cause forest fires unintenionally. When expeliing a blast of super...")
-                .font(.system(size: 24))
+                .font(.system(size: 20))
         }
+        .frame(height: 250)
     }
 }
 

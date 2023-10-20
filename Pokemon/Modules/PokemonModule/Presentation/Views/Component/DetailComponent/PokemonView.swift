@@ -18,32 +18,41 @@ struct PokemonView: View {
                     dismiss()
                 }, title: "Pokemon", number: "007")
                 ImageTextSectionView()
-                Spacer()
+                Spacer(minLength: 30)
                 HStack{
                     ItemView(title: "Height", subTitle: "5'7")
                     Spacer()
                     ItemView(title: "Weight", subTitle: "90.5 Kg")
+
                 }
-                Spacer()
+                Spacer(minLength: 30)
                 HStack{
                     ItemView(title: "Gender(s)", subTitle: "Male, Female")
                     Spacer()
                     ItemView(title: "Egg Groups", subTitle: "Monster, Dragon")
+
                 }
-                Spacer()
+                Spacer(minLength: 30)
                 HStack{
                     ItemView(title: "Ablities", subTitle: "Blaze, Solar-Power")
                     Spacer()
                     ItemView(title: "Types", subTitle: "Fire Flying")
+
                 }
-                Spacer()
-                VStack{
+                Spacer(minLength: 30)
+              
                     Text("Weak Against")
                         .font(.system(size: 15))
                         .bold()
-                    Text("Fight, Ground, Steel, Water, Grass")
-                        .font(.system(size: 13))
+                
+                
+                HStack{
+                    PokemonTypes(type: .electric)
+                    PokemonTypes(type: .ground)
+                    PokemonTypes(type: .fairy)
+                    PokemonTypes(type: .normal)
                 }
+                    
                 StatsView()
             }
         }
