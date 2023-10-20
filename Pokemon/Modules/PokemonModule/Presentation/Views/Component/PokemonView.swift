@@ -9,13 +9,15 @@ import SwiftUI
 
 struct PokemonView: View {
     var pokemonId: Int
-    
+    var dismiss: () -> Void
+
     var body: some View {
         ScrollView{
             VStack{
-                HStack{
-                    Text("This is \(pokemonId) Pokemon Spits fire that is hot enough to melt boulders. Known to cause forest fires unintenionally. When expeliing a blast of super...")
-                }
+                HeaderView(dismiss: {
+                    dismiss()
+                }, title: "Pokemon", number: "007")
+                ImageTextSectionView()
                 Spacer()
                 HStack{
                     ItemView(title: "Height", subTitle: "5'7")
@@ -46,9 +48,12 @@ struct PokemonView: View {
             }
         }
         .padding(.horizontal, 30)
+        .background(Color("backgroundColor"))
+
     }
 }
 
 #Preview {
-    PokemonView(pokemonId: 1)
+    PokemonView(pokemonId: 1){
+    }
 }

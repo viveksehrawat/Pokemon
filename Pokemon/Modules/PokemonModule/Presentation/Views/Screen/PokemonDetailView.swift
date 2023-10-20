@@ -9,7 +9,6 @@ import SwiftUI
 
 struct PokemonDetailView: View {
     var selectedIndex: Int
-    
     @Environment(\.dismiss) var dismiss
 
     @State private var pageIndex = 0
@@ -19,7 +18,11 @@ struct PokemonDetailView: View {
         TabView(selection: $pageIndex) {
             ForEach(pages, id: \.self) { page in
                 VStack {
-                    PokemonView(pokemonId: page)
+                    
+
+                    PokemonView(pokemonId: page){
+                        dismiss()
+                    }
                     HStack{
                         Button("Previous", action: goToPrevious)
                                 .buttonStyle(.bordered)
@@ -29,6 +32,7 @@ struct PokemonDetailView: View {
                 }.tag(page)
             }
         }
+        .background(Color("backgroundColor"))
         .animation(.easeInOut, value: pageIndex)
         .tabViewStyle(.page(indexDisplayMode: .never))
         
