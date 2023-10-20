@@ -25,16 +25,16 @@ struct StatsView: View {
        ]
     
     var body: some View {
-            List(stats) { stat in
-                HStack{
+        LazyVGrid(columns: [GridItem()], alignment: .center) {
+            ForEach(stats){ stat in
+                HStack(alignment: .center){
                     Text(stat.name)
                         .padding(.trailing, 10)
                         .frame(width: 100, alignment: .trailing)
                     BarView(percentage: stat.percent)
                 }
-                .frame( height: 30)
-                .listStyle(.plain)
             }
+        }
     }
 }
 

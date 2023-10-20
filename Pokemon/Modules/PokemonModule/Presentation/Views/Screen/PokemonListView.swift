@@ -33,9 +33,9 @@ struct PokemonListView: View {
                         PokemonSearchView()
                             .padding(.bottom, 10)
                         LazyVGrid(columns: adaptiveColumns, spacing: 10){
-                            ForEach(pokemons){ pokemon in
+                            ForEach(Array(pokemons.enumerated()), id: \.1.id) { (index, pokemon) in
                                 NavigationLink(destination: PokemonDetailView()) {
-                                    PokemonCellView(pokemon: pokemon)
+                                    PokemonCellView(pokemon: pokemon, index: index)
                                         .environmentObject(viewModel)
                                 }
                             }

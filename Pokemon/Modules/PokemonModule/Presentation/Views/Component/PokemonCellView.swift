@@ -10,17 +10,34 @@ import SwiftUI
 struct PokemonCellView: View {
     
     let pokemon: Pokemon
+    let index: Int
     @EnvironmentObject var vm: PokemonListViewModel
     
     var body: some View {
         
         VStack {
-            thumbnailView()
-            Text(pokemon.name)
+//            thumbnailView()
+            Image("pokemon")
+                .resizable()
+                .scaledToFit()
+                .padding()
+            Text(pokemon.name.capitalized)
+                .font(.system(size: 18))
+                .foregroundColor(.black)
+                .bold()
+            Text("\(index + 1)")
+                .font(.system(size: 15))
+                .foregroundColor(.black)
+
         }
-        .frame(height: 200)
-        .background(Color(.white))
-        .cornerRadius(10)
+        .frame(height: 250)
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
+                .foregroundColor(.black)
+        )
+        .background(Color("cellBackground"))
+
     }
     
     private func thumbnailView() -> some View {

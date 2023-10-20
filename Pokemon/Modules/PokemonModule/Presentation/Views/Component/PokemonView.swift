@@ -43,10 +43,9 @@ struct PokemonView: View {
                         .font(.system(size: 13))
                 }
                 StatsView()
-                    .frame(height: 300)
             }
         }
-        
+        .padding(.horizontal, 30)
     }
 }
 
