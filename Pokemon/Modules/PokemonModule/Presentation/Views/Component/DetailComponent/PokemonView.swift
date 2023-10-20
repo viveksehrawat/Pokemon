@@ -10,11 +10,13 @@ import SwiftUI
 struct PokemonView: View {
     var pokemonId: Int
     var dismiss: () -> Void
-    
+//    var next: () -> Void
+//    var previous: () -> Void
+
     let types: [PokemonType] = [.electric, .ground, .fairy, .fire]
     
     var body: some View {
-        ScrollView{
+        ScrollView {
             VStack(alignment: .leading){
                 HeaderView(dismiss: {
                     dismiss()
@@ -72,6 +74,7 @@ struct PokemonView: View {
                 Spacer(minLength: 30)
             }
         }
+        .scrollIndicators(.hidden)
         .padding(.horizontal, 30)
         .background(Color("backgroundColor"))
         
