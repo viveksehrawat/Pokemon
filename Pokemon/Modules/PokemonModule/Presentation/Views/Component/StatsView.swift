@@ -12,6 +12,7 @@ struct Stat: Identifiable {
     let name: String
     let percent: Int
 }
+
 struct StatsView: View {
     
     @State var stats = [
@@ -24,15 +25,16 @@ struct StatsView: View {
        ]
     
     var body: some View {
-        List(stats) { stat in
-            HStack{
-                Text(stat.name)
-                    .padding(.trailing, 10)
-                    .frame(width: 100, alignment: .trailing)
-                
-                BarView(percentage: stat.percent)
+            List(stats) { stat in
+                HStack{
+                    Text(stat.name)
+                        .padding(.trailing, 10)
+                        .frame(width: 100, alignment: .trailing)
+                    BarView(percentage: stat.percent)
+                }
+                .frame( height: 30)
+                .listStyle(.plain)
             }
-        }
     }
 }
 

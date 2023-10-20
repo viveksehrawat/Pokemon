@@ -8,44 +8,37 @@
 import SwiftUI
 
 struct PokemonDetailView: View {
+    @State private var pageIndex = 0
+    private let pages: [Int] = [0,1,2,3,4,5,6]
+    
     var body: some View {
-        ScrollView{
-                VStack{
+        TabView(selection: $pageIndex) {
+            ForEach(pages, id: \.self) { page in
+                VStack {
+                    PokemonView(pokemonId: page)
                     HStack{
-                        Text("Spits fire that is hot enough to melt boulders. Known to cause forest fires unintenionally. When expeliing a blast of super...")
+                        Button("Previous", action: goToPrevious)
+                                .buttonStyle(.bordered)
+                        Button("Next", action: goToNextPage)
+                                .buttonStyle(.bordered)
                     }
-                    Spacer()
-                    HStack{
-                        ItemView(title: "Height", subTitle: "5'7")
-                        Spacer()
-                        ItemView(title: "Weight", subTitle: "90.5 Kg")
-                    }
-                    Spacer()
-                    HStack{
-                        ItemView(title: "Gender(s)", subTitle: "Male, Female")
-                        Spacer()
-                        ItemView(title: "Egg Groups", subTitle: "Monster, Dragon")
-                    }
-                    Spacer()
-                    HStack{
-                        ItemView(title: "Ablities", subTitle: "Blaze, Solar-Power")
-                        Spacer()
-                        ItemView(title: "Types", subTitle: "Fire Flying")
-                    }
-                    Spacer()
-                    VStack{
-                        Text("Weak Against")
-                            .font(.system(size: 15))
-                            .bold()
-                        Text("Fight, Ground, Steel, Water, Grass")
-                            .font(.system(size: 13))
-                    }
-                    StatsView()
-                        .frame(height: 300)
-                }
+                }.tag(page)
             }
         }
+        .animation(.easeInOut, value: pageIndex)
+        .tabViewStyle(.page(indexDisplayMode: .never))
+        
+    }
+    
+    func goToNextPage() {
+        pageIndex += 1
+    }
+    
+    func goToPrevious() {
+        pageIndex -= 1
+    }
 }
+
 #Preview {
     PokemonDetailView()
 }
