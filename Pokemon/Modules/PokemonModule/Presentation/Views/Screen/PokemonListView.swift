@@ -10,17 +10,15 @@ import SwiftUI
 struct PokemonListView: View {
     
     @ObservedObject private(set) var viewModel: PokemonListViewModel
+    @State private var isDetailViewPresented = false // Add this state variable
+
     private let adaptiveColumns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
     ]
     
-    func test(){
-        viewModel.state = .loading
-    }
     
     var body: some View {
-        NavigationStack{
             AsyncContentView(source: viewModel) { pokemons in
                 ScrollView{
                     VStack(alignment: .leading){
@@ -35,7 +33,10 @@ struct PokemonListView: View {
                             .padding(.bottom, 10)
                         LazyVGrid(columns: adaptiveColumns, spacing: 10){
                             ForEach(Array(viewModel.filteredPokemon.enumerated()), id: \.1.id) { (index, pokemon) in
-                                NavigationLink(destination: PokemonDetailView()) {
+                                Button{
+                                    viewModel.selectedPokemonIndex = index
+                                    isDetailViewPresented.toggle()
+                                } label: {
                                     PokemonCellView(pokemon: pokemon, index: index)
                                         .environmentObject(viewModel)
                                 }
@@ -47,6 +48,8 @@ struct PokemonListView: View {
             }
             .padding(.horizontal, 20)
             .background(Color("backgroundColor"))
+            .fullScreenCover(isPresented: $isDetailViewPresented) {
+                PokemonDetailView(selectedIndex: viewModel.selectedPokemonIndex)
+            }
         }
-    }
 }

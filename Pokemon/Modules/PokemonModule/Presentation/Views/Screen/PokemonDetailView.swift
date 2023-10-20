@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct PokemonDetailView: View {
+    var selectedIndex: Int
+    
+    @Environment(\.dismiss) var dismiss
+
     @State private var pageIndex = 0
     private let pages: [Int] = [0,1,2,3,4,5,6]
     
@@ -40,5 +44,5 @@ struct PokemonDetailView: View {
 }
 
 #Preview {
-    PokemonDetailView()
+    PokemonDetailView(selectedIndex: 0)
 }

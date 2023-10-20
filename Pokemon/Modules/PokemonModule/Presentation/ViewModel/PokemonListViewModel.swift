@@ -15,6 +15,9 @@ class PokemonListViewModel: LoadableObject{
     @Published var state = LoadingState<Output>.idle
     @Published var pokemons: [Pokemon] = [Pokemon]()
     @Published var searchText = ""
+    @Published var selectedPokemonIndex = 0
+
+    
 
     init(useCase: IPokemonUseCase) {
         self.useCase = useCase
