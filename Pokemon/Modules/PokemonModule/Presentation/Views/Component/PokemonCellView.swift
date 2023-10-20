@@ -8,42 +8,44 @@
 import SwiftUI
 
 struct PokemonCellView: View {
-   
+    
     let pokemon: Pokemon
     @EnvironmentObject var vm: PokemonListViewModel
     
     var body: some View {
         
         VStack {
-//            thumbnailView()
+            thumbnailView()
             Text(pokemon.name)
         }
         .frame(height: 200)
-        .background(Color(.black))
+        .background(Color(.white))
         .cornerRadius(10)
     }
     
-    
     private func thumbnailView() -> some View {
         
-        let thumbURL = URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(vm.getPokemonIndex(pokemon: pokemon)).png")
-        
-        return AsyncImage(url: thumbURL) { phase in
-            switch phase {
-            case .empty:
-                ProgressView()
-            case .success(let image):
-                image
-                    .resizable()
-                    .scaledToFit()
-                
-//            case .failure:
-//                Image(systemName: "exclamationmark.icloud.fill")
-//                    .font(.system(size: 40))
-//                    .foregroundColor(.red)
-                
-            @unknown default:
-                EmptyView()
+        GeometryReader { geometry in
+            
+            let thumbURL = URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")
+            
+            return AsyncImage(url: thumbURL) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFit()
+                    
+                case .failure:
+                    Image(systemName: "exclamationmark.icloud.fill")
+                        .font(.system(size: 40))
+                        .foregroundColor(.red)
+                    
+                @unknown default:
+                    EmptyView()
+                }
             }
         }
     }

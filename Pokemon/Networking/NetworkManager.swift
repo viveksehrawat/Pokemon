@@ -25,6 +25,12 @@ class NetworkManager: INetworkManager{
         self.init(session: session, requestGenerator: URLRequestGenerator())
     }
     
+    private let certificates: [Data] = {
+        let url = Bundle.main.url(forResource: "raw.githubusercontent.com", withExtension: "cer")!
+        let data = try! Data(contentsOf: url)
+        return [data]
+      }()
+    
     func request<T>(request: INetworkRequest, responseType: T.Type) async throws -> T where T : Decodable {
         guard let urlRequest = try? requestGenerator.createURLRequest(using: request) else {
             throw NetworkError.invalidRequest
