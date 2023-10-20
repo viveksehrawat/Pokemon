@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct PokemonSearchView: View {
-    @State private var searchableText : String = ""
+    
+    @EnvironmentObject var vm: PokemonListViewModel
+    
     var body: some View {
         HStack{
             HStack{
-                TextField("Name or Number", text: $searchableText)
+                TextField("Name or Number", text: $vm.searchText)
                     .font(.system(size: 20))
                     .padding()
                     .cornerRadius(8)

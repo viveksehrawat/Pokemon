@@ -31,9 +31,10 @@ struct PokemonListView: View {
                         Text("Search for any Pokemon that exists on the planet")
                             .font(.system(size: 16))
                         PokemonSearchView()
+                            .environmentObject(viewModel)
                             .padding(.bottom, 10)
                         LazyVGrid(columns: adaptiveColumns, spacing: 10){
-                            ForEach(Array(pokemons.enumerated()), id: \.1.id) { (index, pokemon) in
+                            ForEach(Array(viewModel.filteredPokemon.enumerated()), id: \.1.id) { (index, pokemon) in
                                 NavigationLink(destination: PokemonDetailView()) {
                                     PokemonCellView(pokemon: pokemon, index: index)
                                         .environmentObject(viewModel)

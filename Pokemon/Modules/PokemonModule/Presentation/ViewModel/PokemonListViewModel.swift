@@ -14,9 +14,15 @@ class PokemonListViewModel: LoadableObject{
 
     @Published var state = LoadingState<Output>.idle
     @Published var pokemons: [Pokemon] = [Pokemon]()
-    
+    @Published var searchText = ""
+
     init(useCase: IPokemonUseCase) {
         self.useCase = useCase
+    }
+    
+    var filteredPokemon : [Pokemon] {
+        return searchText == "" ? pokemons : pokemons.filter { $0.name.contains(searchText.lowercased())
+        }
     }
     
     // Get the index of a pokemon
@@ -34,6 +40,7 @@ class PokemonListViewModel: LoadableObject{
             do {
                 let result = try await useCase.fetchPokemonData()
                 state = .loaded(result)
+                pokemons = result
             } catch {
                 state = .failed(error)
                 print(error.localizedDescription)
