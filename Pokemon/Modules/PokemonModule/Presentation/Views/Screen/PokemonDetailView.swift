@@ -23,12 +23,7 @@ struct PokemonDetailView: View {
                     PokemonView(pokemonId: page){
                         dismiss()
                     }
-                    HStack{
-                        Button("Previous", action: goToPrevious)
-                                .buttonStyle(.bordered)
-                        Button("Next", action: goToNextPage)
-                                .buttonStyle(.bordered)
-                    }
+                   
                 }.tag(page)
             }
         }
@@ -38,13 +33,7 @@ struct PokemonDetailView: View {
         
     }
     
-    func goToNextPage() {
-        pageIndex += 1
-    }
     
-    func goToPrevious() {
-        pageIndex -= 1
-    }
 }
 
 #Preview {

@@ -16,25 +16,33 @@ struct Stat: Identifiable {
 struct StatsView: View {
     
     @State var stats = [
-           Stat(name: "First", percent: 24),
-           Stat(name: "2", percent: 74),
-           Stat(name: "3", percent: 56),
-           Stat(name: "4", percent: 48),
-           Stat(name: "5", percent: 90),
-           Stat(name: "6", percent: 87),
+           Stat(name: "Sp Defence", percent: 74),
+           Stat(name: "Defence", percent: 56),
+           Stat(name: "Attack", percent: 48),
+           Stat(name: "HP", percent: 90),
+           Stat(name: "Speed", percent: 87),
        ]
     
     var body: some View {
-        LazyVGrid(columns: [GridItem()], alignment: .center) {
-            ForEach(stats){ stat in
-                HStack(alignment: .center){
-                    Text(stat.name)
-                        .padding(.trailing, 10)
-                        .frame(width: 100, alignment: .trailing)
-                    BarView(percentage: stat.percent)
+        VStack(alignment: .leading){
+            Text("Stats")
+                .font(.system(size: 25))
+                .bold()
+                .padding(.vertical, 10)
+            LazyVGrid(columns: [GridItem()], alignment: .center) {
+                ForEach(stats){ stat in
+                    HStack(alignment: .center){
+                        Text(stat.name)
+                            .font(.system(size: 15))
+                            .padding(.trailing, 20)
+                            .frame(width: 100, alignment: .trailing)
+                        BarView(percentage: stat.percent)
+                    }
                 }
             }
         }
+        .padding()
+        .background(Color("statsBackgroundColor"))
     }
 }
 
@@ -54,7 +62,7 @@ struct BarView: View {
                 
                 Rectangle()
                     .frame(width: CGFloat(percentage) * geometry.size.width / 100, height: 10)
-                    .foregroundColor(Color.green)
+                    .foregroundColor(Color("filterBackgroundColor"))
             }
         }
     }

@@ -47,22 +47,42 @@ struct PokemonView: View {
                     Text("Weak Against")
                         .font(.system(size: 18))
                         .bold()
-                    Spacer(minLength: 10)
-                    HStack(alignment: .top){
-                        PokemonTypes(type: types[0])
-                        PokemonTypes(type: types[1])
-                        PokemonTypes(type: types[2])
-                        PokemonTypes(type: types[3])
+                    Spacer(minLength: 30)
+                    LazyHGrid(rows: [GridItem(.flexible())], spacing: 10) {
+                        ForEach(types, id: \.self) { type in
+                            PokemonTypes(type: type)
+                        }
                     }
                 }
                 Spacer(minLength: 30)
                 
                 StatsView()
+                Spacer(minLength: 30)
+                GeometryReader { geometry in
+                    HStack{
+                        AppButton(title: "Previous") {
+                            goToPrevious()
+                        }
+                        Spacer()
+                        AppButton(title: "Next") {
+                            goToNextPage()
+                        }
+                    }
+                }
+                Spacer(minLength: 30)
             }
         }
         .padding(.horizontal, 30)
         .background(Color("backgroundColor"))
         
+    }
+    
+    func goToNextPage() {
+        //        pageIndex += 1
+    }
+    
+    func goToPrevious() {
+        //        pageIndex -= 1
     }
 }
 
