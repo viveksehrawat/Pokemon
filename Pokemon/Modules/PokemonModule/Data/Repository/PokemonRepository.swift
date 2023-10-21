@@ -19,7 +19,7 @@ class PokemonRepositoryImpl: IPokemonRepository {
         let path = "/api/v2/pokemon"
         let request = NetworkRequest(path: path, method: .get)
         do{
-            let response = try await networkManager.request(request: request, responseType: PokemonResponseDTO.self)
+            let response = try await networkManager.request(request: request, responseType: PokemonListDTO.self)
             return response.toDomain()
         } catch{
             throw error

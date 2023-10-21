@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct PokemonDetailView: View {
-    var selectedIndex: Int
-    @Environment(\.dismiss) var dismiss
     
-    @State private var pageIndex = 0
+    @ObservedObject private(set) var viewModel: PokemonDetailViewModel
+    @Environment(\.dismiss) var dismiss
+
     private let pages: [Int] = [0,1,2,3,4,5,6]
     
     var body: some View {
-        TabView(selection: $pageIndex) {
+        TabView(selection: $viewModel.currentIndex) {
             ForEach(pages, id: \.self) { page in
                 PokemonView(pokemonId: page){
                     dismiss()
@@ -23,13 +23,10 @@ struct PokemonDetailView: View {
                 .tag(page)
                 .gesture(DragGesture())
             }
+            .environmentObject(viewModel)
         }
         .background(Color("backgroundColor"))
-        .animation(.easeInOut, value: pageIndex)
+        .animation(.easeInOut, value: viewModel.currentIndex)
         .tabViewStyle(.page(indexDisplayMode: .never))
     }
-}
-
-#Preview {
-    PokemonDetailView(selectedIndex: 0)
 }

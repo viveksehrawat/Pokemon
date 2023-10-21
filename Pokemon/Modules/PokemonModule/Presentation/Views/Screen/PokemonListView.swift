@@ -17,7 +17,6 @@ struct PokemonListView: View {
         GridItem(.flexible()),
     ]
     
-    
     var body: some View {
             AsyncContentView(source: viewModel) { pokemons in
                 ScrollView{
@@ -49,7 +48,29 @@ struct PokemonListView: View {
             .padding(.horizontal, 20)
             .background(Color("backgroundColor"))
             .fullScreenCover(isPresented: $isDetailViewPresented) {
-                PokemonDetailView(selectedIndex: viewModel.selectedPokemonIndex)
+                PokemonDetailView(viewModel: generatePokemonViewModel())
             }
         }
+    
+    // below one should be in router
+    private func generatePokemonViewModel() -> PokemonDetailViewModel {
+        let viewModel = PokemonDetailViewModel(useCase: generatePokemonUseCase(), index: viewModel.selectedPokemonIndex + 1)
+        return viewModel
+    }
+    
+    private func generatePokemonUseCase() -> IPokemonDetailUseCase {
+        let detailRepo = generateDetailPokemonRepository()
+        let useCase = PokemonDetailUseCaseImpl( pokemonDetailRepository: detailRepo)
+        return useCase
+    }
+    
+    private func generateDetailPokemonRepository() -> IPokemonDetailRepository {
+        let repository = PokemonDetailRepositoryImpl(networkManager: networkManager)
+        return repository
+    }
+    
+    var networkManager: INetworkManager = {
+        let networkManager = NetworkManager()
+        return networkManager
+    }()
 }

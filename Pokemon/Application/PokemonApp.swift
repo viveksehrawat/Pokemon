@@ -22,13 +22,21 @@ struct PokemonApp: App {
         return viewModel
     }
     
-    private func generatePokemonUseCase() -> IPokemonUseCase {
-        let useCase = PokemonUseCaseImpl(respository: generatePokemonRepository())
+    private func generatePokemonUseCase() -> IPokemonListUseCase {
+        let listRepo = generatePokemonRepository()
+        let detailRepo = generateDetailPokemonRepository()
+
+        let useCase = PokemonListUseCaseImpl(respository: listRepo, pokemonDetailRepository: detailRepo)
         return useCase
     }
     
     private func generatePokemonRepository() -> IPokemonRepository {
         let repository = PokemonRepositoryImpl(networkManager: networkManager)
+        return repository
+    }
+    
+    private func generateDetailPokemonRepository() -> IPokemonDetailRepository {
+        let repository = PokemonDetailRepositoryImpl(networkManager: networkManager)
         return repository
     }
     

@@ -6,6 +6,39 @@
 //
 
 import Foundation
+
+class PokemonDetailRepositoryImpl: IPokemonDetailRepository {
+
+    private let networkManager: INetworkManager
+    
+    init(networkManager: INetworkManager) {
+        self.networkManager = networkManager
+    }
+    
+    func fetchPokemonDetail(for name: String) async throws -> PokemonDetail {
+        let path = "/api/v2/pokemon/\(name)"
+        let request = NetworkRequest(path: path, method: .get)
+        do{
+            let response = try await networkManager.request(request: request, responseType: PokemonDetailDTO.self)
+            return response.toDomain()
+        } catch{
+            throw error
+        }
+    }
+    
+//    func fetchPokemonDescription(for id: String) async throws -> PokemonDescription {
+//        <#code#>
+//    }
+//    
+//    func fetchPokemonWeakness(for id: String) async throws -> PokemonWeakness {
+//        <#code#>
+//    }
+//    
+//    func fetchPokemonEvolutionCahin(for url: String) async throws -> PokemonWeakness {
+//        <#code#>
+//    }
+}
+
 //
 //final class DefaultPokemonDetailRepository {
 //

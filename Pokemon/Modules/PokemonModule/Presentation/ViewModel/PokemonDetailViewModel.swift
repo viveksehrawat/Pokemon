@@ -10,31 +10,18 @@ import Foundation
 
 class PokemonDetailViewModel: LoadableObject{
     
-    private let useCase: IPokemonUseCase
-    typealias Output = [Pokemon]
+    private let useCase: IPokemonDetailUseCase
+    typealias Output = PokemonDetail
 
     @Published var state = LoadingState<Output>.idle
-    @Published var pokemons: [Pokemon] = [Pokemon]()
-    @Published var searchText = ""
-    @Published var selectedPokemonIndex = 0
+    @Published var pokemon: PokemonDetail?
+    @Published var currentIndex = 0
 
-    
+    var selectedPokemonIndex: Int
 
-    init(useCase: IPokemonUseCase) {
+    init(useCase: IPokemonDetailUseCase, index: Int) {
         self.useCase = useCase
-    }
-    
-    var filteredPokemon : [Pokemon] {
-        return searchText == "" ? pokemons : pokemons.filter { $0.name.contains(searchText.lowercased())
-        }
-    }
-    
-    // Get the index of a pokemon
-    func getPokemonIndex(pokemon: Pokemon) -> Int {
-        if let index = self.pokemons.firstIndex(of: pokemon){
-            return index + 1
-        }
-        return 0
+        self.selectedPokemonIndex = index
     }
     
     @MainActor
@@ -42,9 +29,9 @@ class PokemonDetailViewModel: LoadableObject{
         state = .loading
         Task{
             do {
-                let result = try await useCase.fetchPokemonData()
-                state = .loaded(result)
-                pokemons = result
+                let result = try await useCase.fetchPokemonDetail(for: "\(selectedPokemonIndex)" )
+//                state = .loaded(result)
+//                pokemon = result
             } catch {
                 state = .failed(error)
                 print(error.localizedDescription)

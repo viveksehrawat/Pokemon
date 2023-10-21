@@ -87,19 +87,13 @@ extension PokemonDetail {
 
     // MARK: - Ability
     struct Ability {
-        let ability: NamedURLResource
+        let ability: Species
         let isHidden: Bool
         let slot: Int
     }
 
     // MARK: - Species
     struct Species {
-        let name: String
-        let url: String
-    }
-
-    // MARK: - Common
-    struct NamedURLResource {
         let name: String
         let url: String
     }
@@ -136,7 +130,7 @@ extension PokemonDetail {
     // MARK: - Stat
     struct Stat {
         let baseStat, effort: Int
-        let stat: NamedURLResource
+        let stat: Species
     }
 
     // MARK: - TypeElement

@@ -8,14 +8,19 @@
 import SwiftUI
 
 struct PokemonView: View {
+    
+    @EnvironmentObject var vm: PokemonDetailViewModel
+    
     var pokemonId: Int
     var dismiss: () -> Void
-//    var next: () -> Void
-//    var previous: () -> Void
-
+    //    var next: () -> Void
+    //    var previous: () -> Void
+    
     let types: [PokemonType] = [.electric, .ground, .fairy, .fire]
     
     var body: some View {
+        AsyncContentView(source: vm) { detail in
+
         ScrollView {
             VStack(alignment: .leading){
                 HeaderView(dismiss: {
@@ -77,8 +82,12 @@ struct PokemonView: View {
         .scrollIndicators(.hidden)
         .padding(.horizontal, 30)
         .background(Color("backgroundColor"))
+        .task {
+            
+        }
         
     }
+}
     
     func goToNextPage() {
         //        pageIndex += 1

@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - PokemonResponse
-struct PokemonResponseDTO: Decodable {
+struct PokemonListDTO: Decodable {
     let next: String
     let results: [PokemonDTO]
 
