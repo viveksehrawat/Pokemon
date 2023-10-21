@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct PokemonCellView: View {
     
@@ -16,8 +17,7 @@ struct PokemonCellView: View {
     var body: some View {
         
         VStack {
-//            thumbnailView()
-            Image("pokemon")
+            KFImage(URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(index).png")!)
                 .resizable()
                 .scaledToFit()
                 .padding()

@@ -8,17 +8,17 @@
 import Foundation
 
 // MARK: - PokemonResponse
-struct PokemonResponse: Decodable {
+struct PokemonResponseDTO: Decodable {
     let next: String
-    let results: [PokemonDataListDTO]
+    let results: [PokemonDTO]
 
-    func toDomain() -> PokemonDomainListDTO {
+    func toDomain() -> PokemonPage {
         return .init(next: next, pokemons: results.map { $0.toDomain() })
     }
 }
 
 // MARK: - Result
-struct PokemonDataListDTO: Decodable {
+struct PokemonDTO: Decodable {
     let name: String
     let url: String
 

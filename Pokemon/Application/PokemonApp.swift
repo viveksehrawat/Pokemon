@@ -28,13 +28,8 @@ struct PokemonApp: App {
     }
     
     private func generatePokemonRepository() -> IPokemonRepository {
-        let repository = PokemonRepositoryImpl(service: generatePokemonService())
+        let repository = PokemonRepositoryImpl(networkManager: networkManager)
         return repository
-    }
-    
-    private func generatePokemonService() -> IPokemonService {
-        let service = PokemonServiceImpl(networkManager: networkManager)
-        return service
     }
     
     var networkManager: INetworkManager = {

@@ -7,19 +7,6 @@
 
 import SwiftUI
 
-enum PokemonType: String {
-    case fire
-    case poison
-    case water
-    case electric
-    case psychic
-    case normal
-    case ground
-    case flying
-    case fairy
-    case none
-}
-
 struct PokemonTypes: View {
     let type: PokemonType
     

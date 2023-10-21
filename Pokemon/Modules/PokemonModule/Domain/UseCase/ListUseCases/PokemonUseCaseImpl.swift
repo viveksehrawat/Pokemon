@@ -16,7 +16,7 @@ class PokemonUseCaseImpl: IPokemonUseCase {
     }
     
     func fetchPokemonData() async throws -> [Pokemon] {
-        let pokemonData = try await self.respository.fetchPokemonList()
+        let pokemonData = try await self.respository.fetchPokemonsFromNetwork()
         return pokemonData.pokemons
     }
 }

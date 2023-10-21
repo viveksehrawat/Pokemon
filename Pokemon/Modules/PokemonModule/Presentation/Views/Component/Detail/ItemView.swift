@@ -13,11 +13,10 @@ struct ItemView: View {
     let subTitle: String
 
     var body: some View {
-        VStack(alignment: .leading){
+        VStack(alignment: .leading, spacing: 4) {
             Text(title)
                 .font(.system(size: 18))
                 .bold()
-            Spacer(minLength: 10)
             Text(subTitle)
                 .font(.system(size: 15))
 

@@ -8,5 +8,5 @@
 import Foundation
 
 protocol IPokemonRepository {
-    func fetchPokemonList() async throws ->  PokemonDomainListDTO
+    func fetchPokemonsFromNetwork() async throws ->  PokemonPage
 }

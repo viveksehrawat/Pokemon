@@ -9,14 +9,21 @@ import Foundation
 
 class PokemonRepositoryImpl: IPokemonRepository {
    
-    private let service: IPokemonService
-    init(service: IPokemonService) {
-        self.service = service
+    private let networkManager: INetworkManager
+    
+    init(networkManager: INetworkManager) {
+        self.networkManager = networkManager
     }
     
-    func fetchPokemonList() async throws ->  PokemonDomainListDTO {
-        let response = try await self.service.fetchPokemonsFromNetwork()
-        return response.toDomain()
+    func fetchPokemonsFromNetwork() async throws -> PokemonPage{
+        let path = "/api/v2/pokemon"
+        let request = NetworkRequest(path: path, method: .get)
+        do{
+            let response = try await networkManager.request(request: request, responseType: PokemonResponseDTO.self)
+            return response.toDomain()
+        } catch{
+            throw error
+        }
     }
     
 }
