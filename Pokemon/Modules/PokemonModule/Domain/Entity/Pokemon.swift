@@ -22,6 +22,7 @@ struct Pokemon: Identifiable, Equatable {
 // MARK: PokemonDetail
 
 struct PokemonDetail {
+    
     let abilities: [Ability]
     let height: Int
     let id: Int
@@ -58,7 +59,9 @@ struct PokemonDetail {
         self.responseTypes = responseTypes
         self.types = self.responseTypes.map {$0.toPokemonType()}
     }
+    
 }
+
 
 enum PokemonType: String, CaseIterable {
     case normal

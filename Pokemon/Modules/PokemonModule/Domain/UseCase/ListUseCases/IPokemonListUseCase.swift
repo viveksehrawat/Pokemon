@@ -9,6 +9,6 @@ import Foundation
 
 protocol IPokemonListUseCase {
     func fetchPokemonList() async throws -> PokemonPage
-    func fetchPokemonDetail(for name: String) async throws -> PokemonDetail
+    func fetchPokemonDetail(for id: Int) async throws -> PokemonDetail
 
 }

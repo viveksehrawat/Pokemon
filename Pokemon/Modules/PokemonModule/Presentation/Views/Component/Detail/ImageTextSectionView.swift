@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ImageTextSectionView: View {
-    
+    @EnvironmentObject var pokemonDetailVM: PokemonDetailViewModel
+
     var body: some View {
         HStack{
             Image("pokemon")
@@ -22,8 +23,10 @@ struct ImageTextSectionView: View {
                 )
                 .padding(.leading,1)
             Spacer(minLength: 10)
-            Text("This is Pokemon Spits fire that is hot enough to melt Known to cause forest fires unintenionally. When expeliing a blast of super...")
-                .font(.system(size: 20))
+            Text(pokemonDetailVM.description)
+                .font(.system(size: 18))
+                .lineLimit(10)
+
         }
         .frame(height: 250)
     }

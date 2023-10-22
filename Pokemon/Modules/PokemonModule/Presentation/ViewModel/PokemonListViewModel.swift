@@ -56,7 +56,7 @@ class PokemonListViewModel: LoadableObject{
     @MainActor
     private func fetchPokemonDetails(for page: PokemonPage) async   {
         let pokemonList = page.pokemons
-        
+        /*
         do {
         // Create a task group to fetch Pokemon details concurrently
             try await withThrowingTaskGroup(of: PokemonDetail.self) { taskGroup in
@@ -81,7 +81,7 @@ class PokemonListViewModel: LoadableObject{
             state = .failed(error)
             }
         
-        
+        */
         pokemons = pokemonList
         state = .loaded(pokemonList)
 //        self.appendPage(page, details: self.detailItems)

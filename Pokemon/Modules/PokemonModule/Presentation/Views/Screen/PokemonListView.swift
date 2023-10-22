@@ -54,7 +54,8 @@ struct PokemonListView: View {
     
     // below one should be in router
     private func generatePokemonViewModel() -> PokemonDetailViewModel {
-        let viewModel = PokemonDetailViewModel(useCase: generatePokemonUseCase(), index: viewModel.selectedPokemonIndex + 1)
+        let viewModel = PokemonDetailViewModel(useCase: generatePokemonUseCase(), totalPages: viewModel.pokemons.count, selectedIndex: viewModel.selectedPokemonIndex + 1)
+
         return viewModel
     }
     

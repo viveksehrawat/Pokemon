@@ -11,22 +11,23 @@ struct PokemonDetailView: View {
     
     @ObservedObject private(set) var viewModel: PokemonDetailViewModel
     @Environment(\.dismiss) var dismiss
-
-    private let pages: [Int] = [0,1,2,3,4,5,6]
     
     var body: some View {
-        TabView(selection: $viewModel.currentIndex) {
-            ForEach(pages, id: \.self) { page in
-                PokemonView(pokemonId: page){
-                    dismiss()
+        AsyncContentView(source: viewModel) { pokemonDesc in
+            
+            TabView(selection: $viewModel.currentIndex) {
+                ForEach(viewModel.pages, id: \.self) { page in
+                    PokemonView(pokemonId: page){
+                        dismiss()
+                    }
+                    .tag(page)
+                    .gesture(DragGesture())
                 }
-                .tag(page)
-                .gesture(DragGesture())
+                .environmentObject(viewModel)
             }
-            .environmentObject(viewModel)
+            .background(Color("backgroundColor"))
+            .animation(.easeInOut, value: viewModel.currentIndex)
+            .tabViewStyle(.page(indexDisplayMode: .never))
         }
-        .background(Color("backgroundColor"))
-        .animation(.easeInOut, value: viewModel.currentIndex)
-        .tabViewStyle(.page(indexDisplayMode: .never))
     }
 }

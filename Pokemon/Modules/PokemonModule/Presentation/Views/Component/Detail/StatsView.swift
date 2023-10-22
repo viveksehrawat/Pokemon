@@ -7,22 +7,32 @@
 
 import SwiftUI
 
-struct Stat: Identifiable {
-    var id = UUID()
-    let name: String
-    let percent: Int
+class StatItem: Hashable, Identifiable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+
+    public static func == (lhs: StatItem, rhs: StatItem) -> Bool {
+        lhs.title == rhs.title
+    }
+
+    public var id: ObjectIdentifier {
+        ObjectIdentifier(self)
+    }
+
+    init(title: String, progress: Float) {
+        self.title = title
+        self.progress = progress
+    }
+
+    var title: String
+    let progress: Float
 }
 
 struct StatsView: View {
-    
-    @State var stats = [
-           Stat(name: "Sp Defence", percent: 74),
-           Stat(name: "Defence", percent: 56),
-           Stat(name: "Attack", percent: 48),
-           Stat(name: "HP", percent: 90),
-           Stat(name: "Speed", percent: 87),
-       ]
-    
+
+    let statItems: [StatItem]
+
     var body: some View {
         VStack(alignment: .leading){
             Text("Stats")
@@ -30,13 +40,13 @@ struct StatsView: View {
                 .bold()
                 .padding(.vertical, 10)
             LazyVGrid(columns: [GridItem()], alignment: .center) {
-                ForEach(stats){ stat in
+                ForEach(statItems, id: \.self) { statItem in
                     HStack(alignment: .center){
-                        Text(stat.name)
+                        Text(statItem.title.capitalized)
                             .font(.system(size: 15))
                             .padding(.trailing, 20)
-                            .frame(width: 100, alignment: .trailing)
-                        BarView(percentage: stat.percent)
+                            .frame(width: 100, alignment: .leading)
+                        BarView(percentage: statItem.progress)
                     }
                 }
             }
@@ -46,24 +56,32 @@ struct StatsView: View {
     }
 }
 
-#Preview {
-    StatsView()
-}
+//#Preview {
+//    StatsView()
+//}
 
 struct BarView: View {
-    let percentage: Int
+    let percentage: Float
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .leading) {
-                Rectangle()
-                    .frame(width: geometry.size.width, height: 10)
-                    .foregroundColor(Color.gray)
-                
-                Rectangle()
-                    .frame(width: CGFloat(percentage) * geometry.size.width / 100, height: 10)
-                    .foregroundColor(Color("filterBackgroundColor"))
+            GeometryReader { geometry in
+                ZStack(alignment: .leading) {
+                    Rectangle()
+                        .frame(width: geometry.size.width, height: 15)
+                        .foregroundColor(Color.gray)
+
+                    Rectangle()
+                        .frame(width: CGFloat(percentage) * geometry.size.width / 100, height: 15)
+                        .foregroundColor(Color("filterBackgroundColor"))
+
+                    Text(String(format: "%.1f%%", percentage))
+                        .font(.system(size: 10))
+                        .foregroundColor(.white)
+                        .padding(.leading, 5)
+                }
             }
         }
     }
-}
+    
+
+

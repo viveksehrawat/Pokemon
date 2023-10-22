@@ -62,8 +62,7 @@ struct PokemonView: View {
                     }
                 }
                 Spacer(minLength: 30)
-                
-                StatsView()
+                StatsView(statItems: vm.getStatItems())
                 Spacer(minLength: 30)
                 GeometryReader { geometry in
                     HStack{

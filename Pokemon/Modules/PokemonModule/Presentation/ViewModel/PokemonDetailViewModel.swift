@@ -10,18 +10,31 @@ import Foundation
 
 class PokemonDetailViewModel: LoadableObject{
     
-    private let useCase: IPokemonDetailUseCase
-    typealias Output = PokemonDetail
-
+    typealias Output = PokemonDescription
+    
     @Published var state = LoadingState<Output>.idle
     @Published var pokemon: PokemonDetail?
-    @Published var currentIndex = 0
+    
+    @Published var pokemonDescription: PokemonDescription?
+    @Published var pokemonWeakness: PokemonWeakness?
+    @Published var pokemonEvolutionChain: EvolutionChain?
+//    @Published var pokemonDetail: PokemonDetail?
 
-    var selectedPokemonIndex: Int
-
-    init(useCase: IPokemonDetailUseCase, index: Int) {
+    private let useCase: IPokemonDetailUseCase
+    var currentIndex: Int
+    var pages: [Int]
+    
+    init(useCase: IPokemonDetailUseCase, totalPages: Int, selectedIndex: Int) {
         self.useCase = useCase
-        self.selectedPokemonIndex = index
+        self.pages = Array(1...totalPages)
+        self.currentIndex = selectedIndex
+    }
+    
+    var pokemonDetail: PokemonDetail! {
+        didSet {
+//            evolutionChainPokemonDetails.append(pokemonDetail)
+//            image(url: pokemonDetail.imageUrl) {self.detailImage = $0}
+        }
     }
     
     @MainActor
@@ -29,13 +42,39 @@ class PokemonDetailViewModel: LoadableObject{
         state = .loading
         Task{
             do {
-                let result = try await useCase.fetchPokemonDetail(for: "\(selectedPokemonIndex)" )
-//                state = .loaded(result)
-//                pokemon = result
+                let itemDetail = try await self.useCase.fetchPokemonDetail(for: currentIndex)
+
+                let pokDesc = try await useCase.fetchPokemonDescription(for: currentIndex)
+                let pokWeakness = try await useCase.fetchPokemonWeakness(for: currentIndex)
+                
+                pokemonDetail = itemDetail
+                pokemonDescription = pokDesc
+                pokemonWeakness = pokWeakness
+                state = .loaded(pokDesc)
+                
             } catch {
                 state = .failed(error)
                 print(error.localizedDescription)
             }
         }
     }
+    
+    var description: String {
+        pokemonDescription?.flavorTextEntries.first?.flavorText ?? ""
+    }
+    
+    func getStatItems() -> [StatItem] {
+        pokemonDetail.stats.map {
+            StatItem(title: $0.stat.name, progress: Float($0.baseStat))
+        }
+    }
+    
+    func goToNextPage() {
+        currentIndex += 1
+    }
+    
+    func goToPrevious() {
+        currentIndex -= 1
+    }
+    
 }
