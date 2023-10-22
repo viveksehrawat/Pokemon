@@ -22,7 +22,7 @@ struct PokemonView: View {
         AsyncContentView(source: vm) { detail in
 
         ScrollView {
-            VStack(alignment: .leading){
+            VStack(alignment: .leading, spacing: 30){
                 HeaderView(dismiss: {
                     dismiss()
                 }, title: "Pokemon", number: "007")
@@ -34,36 +34,25 @@ struct PokemonView: View {
                     ItemView(title: "Weight", subTitle: "90.5 Kg")
                     
                 }
-                Spacer(minLength: 30)
+
                 HStack{
                     ItemView(title: "Gender(s)", subTitle: "Male, Female")
                     Spacer()
                     ItemView(title: "Egg Groups", subTitle: "Monster, Dragon")
                     
                 }
-                Spacer(minLength: 30)
+
                 HStack{
                     ItemView(title: "Ablities", subTitle: "Blaze, Solar-Power")
                     Spacer()
-                    ItemView(title: "Types", subTitle: "Fire Flying")
-                    
+                    QualityView(title: "Types", data: vm.typeNames)
+
                 }
-                Spacer(minLength: 30)
-                
-                VStack(alignment: .leading){
-                    Text("Weak Against")
-                        .font(.system(size: 18))
-                        .bold()
-                    Spacer(minLength: 30)
-                    LazyHGrid(rows: [GridItem(.flexible())], spacing: 10) {
-                        ForEach(types, id: \.self) { type in
-                            PokemonTypes(type: type)
-                        }
-                    }
-                }
-                Spacer(minLength: 30)
+
+                QualityView(title: "Weak Against", data: vm.getAllWeaknesses())
+
                 StatsView(statItems: vm.getStatItems())
-                Spacer(minLength: 30)
+
                 GeometryReader { geometry in
                     HStack{
                         AppButton(title: "Previous") {

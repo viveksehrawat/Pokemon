@@ -13,16 +13,48 @@ extension Color {
     
     static func pokemon(type: PokemonType) -> Color {
         switch type {
-            case .fire: return Color(hex: "EDC2C4")
-            case .poison: return Color(hex: "CFB7ED")
-            case .water: return Color(hex: "CBD5ED")
-            case .electric: return Color(hex: "E2E2A0")
-            case .psychic: return Color(hex: "DDC0CF")
-            case .normal: return Color(hex: "DDCBD0")
-            case .ground: return Color(hex: "F4D1A6")
-            case .flying: return Color(hex: "B2D2E8")
-            case .fairy: return Color(hex: "E4C0CF")
-            default: return  Color(hex: "")
+        case .normal:
+            return  Color(hex: "#DDCBD0")
+        case .fighting:
+            return  Color(hex: "#FCC1B0")
+        case .flying:
+            return  Color(hex: "#B2D2E8")
+        case .poison:
+            return  Color(hex: "#CFB7ED")
+        case .ground:
+            return Color(hex: "#F4D1A6")
+        case .rock:
+            return Color(hex: "#C5AEA8")
+        case .bug:
+            return Color(hex: "#C1E0C8")
+        case .ghost:
+            return Color(hex: "#D7C2D7")
+        case .steel:
+            return Color(hex: "#C2D4CE")
+        case .fire:
+            return Color(hex: "#EDC2C4")
+        case .water:
+            return Color(hex: "#CBD5ED")
+        case .grass:
+            return Color(hex: "#C0D4C8")
+        case .electric:
+            return Color(hex: "#E2E2A0")
+        case .psychic:
+            return Color(hex: "#DDC0CF")
+        case .ice:
+            return Color(hex: "#C7D7DF")
+        case .dragon:
+            return Color(hex: "#CADCDF")
+        case .dark:
+            return Color(hex: "#C6C5E3")
+        case .fairy:
+            return Color(hex: "#E4C0CF")
+        case .unknown:
+            return Color(hex: "#CODFDD")
+        case .shadow:
+            return Color(hex: "#CACACA")
+//        default: return  Color(hex: "")
+
         }
     }
 }

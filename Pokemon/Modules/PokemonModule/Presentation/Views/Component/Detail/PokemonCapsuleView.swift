@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PokemonTypes: View {
+struct PokemonCapsuleView: View {
     let type: PokemonType
     
     var body: some View {
@@ -26,6 +26,6 @@ struct PokemonTypes: View {
     }
 }
 
-#Preview {
-    PokemonTypes(type: PokemonType.electric)
-}
+//#Preview {
+//    PokemonTypes(type: PokemonType.electric)
+//}

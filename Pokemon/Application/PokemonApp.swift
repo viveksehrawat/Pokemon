@@ -15,7 +15,6 @@ struct PokemonApp: App {
         }
     }
     
-    
     // below one should be in
     private func generatePokemonViewModel() -> PokemonListViewModel {
         let viewModel = PokemonListViewModel(useCase: generatePokemonUseCase())

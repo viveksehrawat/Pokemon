@@ -63,6 +63,14 @@ class PokemonDetailViewModel: LoadableObject{
         pokemonDescription?.flavorTextEntries.first?.flavorText ?? ""
     }
     
+    func getAllWeaknesses() -> [String] {
+        self.pokemonWeakness?.damageRelations.doubleDamageFrom.map {$0.name} ?? []
+    }
+
+    var typeNames: [String] {
+        pokemonDetail?.types.map {$0.rawValue} ?? []
+    }
+
     func getStatItems() -> [StatItem] {
         pokemonDetail.stats.map {
             StatItem(title: $0.stat.name, progress: Float($0.baseStat))
