@@ -43,9 +43,9 @@ struct StatsView: View {
                 ForEach(statItems, id: \.self) { statItem in
                     HStack(alignment: .center){
                         Text(statItem.title.capitalized)
-                            .font(.system(size: 15))
+                            .font(.system(size: 12))
                             .padding(.trailing, 20)
-                            .frame(width: 100, alignment: .leading)
+                            .frame(width: 120, alignment: .leading)
                         BarView(percentage: statItem.progress)
                     }
                 }

@@ -25,25 +25,24 @@ struct PokemonView: View {
             VStack(alignment: .leading, spacing: 30){
                 HeaderView(dismiss: {
                     dismiss()
-                }, title: "Pokemon", number: "007")
+                }, title: vm.pokemonDetail.name.uppercased(), number: String(format: "%03d", vm.pokemonDetail.id))
                 ImageTextSectionView()
                 Spacer(minLength: 30)
                 HStack{
-                    ItemView(title: "Height", subTitle: "5'7")
+                    ItemView(title: "Height", subTitle: vm.height)
                     Spacer()
-                    ItemView(title: "Weight", subTitle: "90.5 Kg")
+                    ItemView(title: "Weight", subTitle: vm.weight)
+                }
+
+                HStack{
+                    ItemView(title: "Gender(s)", subTitle: vm.genders)
+                    Spacer()
+                    ItemView(title: "Egg Groups", subTitle: vm.eggGroups)
                     
                 }
 
                 HStack{
-                    ItemView(title: "Gender(s)", subTitle: "Male, Female")
-                    Spacer()
-                    ItemView(title: "Egg Groups", subTitle: "Monster, Dragon")
-                    
-                }
-
-                HStack{
-                    ItemView(title: "Ablities", subTitle: "Blaze, Solar-Power")
+                    ItemView(title: "Ablities", subTitle:vm.abilities)
                     Spacer()
                     QualityView(title: "Types", data: vm.typeNames)
 
