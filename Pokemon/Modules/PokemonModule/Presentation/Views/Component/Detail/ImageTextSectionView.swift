@@ -6,13 +6,17 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ImageTextSectionView: View {
     @EnvironmentObject var pokemonDetailVM: PokemonDetailViewModel
 
     var body: some View {
         HStack{
-            Image("pokemon")
+            //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png
+
+//            let s = print(pokemonDetailVM.pokemonDetail.imageUrl)
+            KFImage(URL(string: pokemonDetailVM.pokemonDetail.imageUrl))
                 .resizable()
                 .scaledToFit()
                 .frame(height: 250)
@@ -21,7 +25,7 @@ struct ImageTextSectionView: View {
                         .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
                         .foregroundColor(.black)
                 )
-                .padding(.leading,1)
+                    .padding(.leading,1)
             Spacer(minLength: 10)
             Text(pokemonDetailVM.description)
                 .font(.system(size: 18))

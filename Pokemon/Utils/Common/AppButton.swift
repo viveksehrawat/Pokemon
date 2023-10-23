@@ -17,9 +17,8 @@ struct AppButton: View {
             action()
         } label: {
             Text(title)
-                .font(.system(size: 20))
-                .bold()
-                .frame(width: 120, height: 40)
+                .font(.system(size: 18))
+                .frame(width: 130, height: 40)
                 .background(Color("filterBackgroundColor"))
                 .foregroundColor(.white)
                 .cornerRadius(8)

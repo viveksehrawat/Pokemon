@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 class PokemonDetailViewModel: LoadableObject{
@@ -19,6 +20,8 @@ class PokemonDetailViewModel: LoadableObject{
     @Published var pokemonWeakness: PokemonWeakness?
     @Published var pokemonEvolutionChain: EvolutionChain?
 //    @Published var pokemonDetail: PokemonDetail?
+   // @Published var evolutionChainDetails: [EvolutionChainDetail] = []
+    @Published var detailImage: UIImage =  UIImage()
 
     private let useCase: IPokemonDetailUseCase
     var currentIndex: Int
@@ -32,8 +35,8 @@ class PokemonDetailViewModel: LoadableObject{
     
     var pokemonDetail: PokemonDetail! {
         didSet {
-//            evolutionChainPokemonDetails.append(pokemonDetail)
-//            image(url: pokemonDetail.imageUrl) {self.detailImage = $0}
+           // evolutionChainPokemonDetails.append(pokemonDetail)
+       //     image(url: pokemonDetail.imageUrl) {self.detailImage = $0}
         }
     }
     
