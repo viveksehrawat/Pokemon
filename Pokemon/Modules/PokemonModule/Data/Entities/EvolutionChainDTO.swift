@@ -6,8 +6,7 @@
 //
 
 import Foundation
-
-// MARK: - EvolutionChain
+// MARK: - EvolutionChainDTO
 struct EvolutionChainDTO: Decodable {
     let chain: Chain
     let id: Int
@@ -22,12 +21,13 @@ struct EvolutionChainDTO: Decodable {
         let evolvesTo: [Chain]
         let species: Specie
 
-        private enum Codingkeys: String, CodingKey {
+        enum CodingKeys: String, CodingKey {
             case evolvesTo = "evolves_to"
+            case species
         }
 
         func toDomain() -> EvolutionChain.Chain {
-            .init(evolvesTo: evolvesTo.map {$0.toDomain()},
+            .init(evolvesTo: evolvesTo.map { $0.toDomain() },
                   species: species.toDomain())
         }
     }

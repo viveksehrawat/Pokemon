@@ -9,15 +9,13 @@ import Foundation
 
 class PokemonDetailRepositoryImpl: IPokemonDetailRepository {
     
-    
-
     private let networkManager: INetworkManager
     
     init(networkManager: INetworkManager) {
         self.networkManager = networkManager
     }
     
-    func fetchPokemonDetail(for name: Int) async throws -> PokemonDetail {
+    func fetchPokemonDetail(for name: String) async throws -> PokemonDetail {
         let path = "/api/v2/pokemon/\(name)"
         let request = NetworkRequest(path: path, method: .get)
         do{
@@ -51,93 +49,13 @@ class PokemonDetailRepositoryImpl: IPokemonDetailRepository {
         }
     }
     
-//    func fetchPokemonEvolutionChain(for url: String) async throws -> PokemonWeakness {
-//        <#code#>
-//    }
+    func fetchPokemonEvolutionChain(for url: String) async throws -> EvolutionChain{
+        let request = NetworkRequest(path: url, method: .get, fullURL: true)
+        do{
+            let response = try await networkManager.request(request: request ,responseType: EvolutionChainDTO.self)
+            return response.toDomain()
+        } catch{
+            throw error
+        }
+    }
 }
-
-//
-//final class DefaultPokemonDetailRepository {
-//
-//    private let dataTransferService: DataTransferService
-//
-//    init(dataTransferService: DataTransferService) {
-//        self.dataTransferService = dataTransferService
-//    }
-//}
-//
-//extension DefaultPokemonDetailRepository: PokemonDetailRepository {
-//
-//    func fetchPokemonDescription(id: Int,
-//                                 completion: @escaping (Result<PokemonDescription, Error>) -> Void) -> Cancellable? {
-//
-//        let task = RepositoryTask()
-//
-//        let endpoint = APIEndpoints.getPokemonDescription(with: id)
-//        task.networkTask = self.dataTransferService.request(with: endpoint) { result in
-//            switch result {
-//            case .success(let responseDTO):
-//                completion(.success(responseDTO.toDomain()))
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//
-//        return task
-//    }
-//
-//    func fetchPokemonDetail(name: String,
-//                            completion: @escaping (Result<PokemonDetail, Error>) -> Void) -> Cancellable? {
-//
-//        let task = RepositoryTask()
-//
-//        let endpoint = APIEndpoints.getPokemonDetail(with: name)
-//
-//        task.networkTask = self.dataTransferService.request(with: endpoint) { result in
-//            switch result {
-//            case .success(let responseDTO):
-//                completion(.success(responseDTO.toDomain()))
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//
-//        return task
-//    }
-//
-//    func fetchPokemonWeakness(id: Int,
-//                              completion: @escaping (Result<PokemonWeakness, Error>) -> Void) -> Cancellable? {
-//
-//        let task = RepositoryTask()
-//
-//        let endpoint = APIEndpoints.getPokemonWeakness(with: id)
-//
-//        task.networkTask = self.dataTransferService.request(with: endpoint) { result in
-//            switch result {
-//            case .success(let responseDTO):
-//                completion(.success(responseDTO.toDomain()))
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//
-//        return task
-//    }
-//
-//    func fetchPokemonEvolutionChain(url: String, completion: @escaping (Result<EvolutionChain, Error>) -> Void) -> Cancellable? {
-//        let task = RepositoryTask()
-//
-//        let endpoint = APIEndpoints.getPokemonEvolutionChain(with: url)
-//        task.networkTask = self.dataTransferService.request(with: endpoint) { result in
-//            switch result {
-//            case .success(let responseDTO):
-//                completion(.success(responseDTO.toDomain()))
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//
-//        return task
-//    }
-//
-//}

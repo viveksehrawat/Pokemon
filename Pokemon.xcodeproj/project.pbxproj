@@ -168,8 +168,8 @@
 				43189CBE2AE28EBB00B7964E /* ImageTextSectionView.swift */,
 				4382608D2AE5702B005D9723 /* QualityView.swift */,
 				43189CAF2AE23EB000B7964E /* ItemView.swift */,
-				438260752AE37DA4005D9723 /* EvolutionChainView.swift */,
 				43189CB12AE240D200B7964E /* StatsView.swift */,
+				438260752AE37DA4005D9723 /* EvolutionChainView.swift */,
 				43189CB72AE24C9D00B7964E /* PokemonCapsuleView.swift */,
 				43189CB92AE25F0400B7964E /* PokemonView.swift */,
 			);

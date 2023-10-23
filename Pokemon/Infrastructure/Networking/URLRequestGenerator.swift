@@ -19,7 +19,13 @@ class URLRequestGenerator: IURLRequestGenerator {
         
     func createURLRequest(using endPoint: INetworkRequest) throws -> URLRequest {
         do {
-            let url = try createURL(with: endPoint)
+            
+            var url: URL
+            if endPoint.fullURL{
+                url = URL(string: endPoint.path)!
+            }else{
+                url = try createURL(with: endPoint)
+            }
             
             var urlRequest = URLRequest(url: url,
                                         cachePolicy: .useProtocolCachePolicy,

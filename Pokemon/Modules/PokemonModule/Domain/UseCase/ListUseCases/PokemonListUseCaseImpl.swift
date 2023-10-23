@@ -9,6 +9,7 @@ import Foundation
 
 class PokemonListUseCaseImpl: IPokemonListUseCase {
     
+    
     private let respository: IPokemonRepository
     private let pokemonDetailRepository: IPokemonDetailRepository
 
@@ -22,8 +23,8 @@ class PokemonListUseCaseImpl: IPokemonListUseCase {
         return pokemonData
     }
     
-    func fetchPokemonDetail(for id: Int) async throws -> PokemonDetail{
-        let pokemonDetail = try await self.pokemonDetailRepository.fetchPokemonDetail(for: id)
+    func fetchPokemonDetail(for name: String) async throws -> PokemonDetail{
+        let pokemonDetail = try await self.pokemonDetailRepository.fetchPokemonDetail(for: name)
         return pokemonDetail
     }
 

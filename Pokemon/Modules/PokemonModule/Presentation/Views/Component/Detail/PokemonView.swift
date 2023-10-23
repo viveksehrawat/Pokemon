@@ -51,6 +51,7 @@ struct PokemonView: View {
                 QualityView(title: "Weak Against", data: vm.getAllWeaknesses())
 
                 StatsView(statItems: vm.getStatItems())
+                EvolutionChainView()
 
                 GeometryReader { geometry in
                     HStack{

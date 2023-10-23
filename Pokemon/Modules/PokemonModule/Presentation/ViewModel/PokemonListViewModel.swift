@@ -17,7 +17,6 @@ class PokemonListViewModel: LoadableObject{
     @Published var searchText = ""
     @Published var selectedPokemonIndex = 0
     @Sorted(by: \.id) var detailItems: [PokemonDetail] = []
-
     
 
     init(useCase: IPokemonListUseCase) {
