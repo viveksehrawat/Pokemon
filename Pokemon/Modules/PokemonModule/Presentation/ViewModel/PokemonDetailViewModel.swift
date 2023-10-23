@@ -39,6 +39,8 @@ class PokemonDetailViewModel: LoadableObject{
     var pokemonDetail: PokemonDetail! {
         didSet {
             evolutionChainPokemonDetails.append(pokemonDetail)
+         //   image(url: pokemonDetail.imageUrl) {self.detailImage = $0}
+
         }
     }
     
@@ -142,8 +144,11 @@ class PokemonDetailViewModel: LoadableObject{
     }
     
     
+    @MainActor
     private func getEvolutionChainPokemonDetails() async {
         let chainList = self.getEvolutionChainList().filter { $0.name.caseInsensitiveCompare(pokemonDetail.name) != .orderedSame }
+        print("=**************")
+        print(chainList.count)
         
         do {
              try await withThrowingTaskGroup(of: PokemonDetail.self) { taskGroup in
@@ -152,15 +157,23 @@ class PokemonDetailViewModel: LoadableObject{
                 for specie in chainList {
                     taskGroup.addTask {
                             let detail = try await self.useCase.fetchPokemonDetail(for: specie.name)
+                        
+
                             return detail
                 }
             }
                  
             for try await detail in taskGroup {
-                
-                    self.evolutionChainDetails.append(EvolutionChainDetail(id: detail.id, imageUrl: detail.imageUrl))
-                
+//                await MainActor.run {
+                    evolutionChainPokemonDetails.append(detail)
+                   
+//                }
             }
+                 
+                 self.evolutionChainPokemonDetails.forEach({ detail in
+                     self.evolutionChainDetails.append(EvolutionChainDetail(id: detail.id, imageUrl: detail.imageUrl))
+                 })
+                 
         }
     } catch {
         print("Error loading Pokemon details: \(error.localizedDescription)")
