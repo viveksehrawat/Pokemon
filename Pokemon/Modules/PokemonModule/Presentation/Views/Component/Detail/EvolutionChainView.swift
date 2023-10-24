@@ -15,21 +15,21 @@ struct EvolutionChainDetail: Hashable, Identifiable {
 
 struct EvolutionChainView: View {
     
-    @EnvironmentObject var pokemonDetailVM: PokemonDetailViewModel
-    
+    var evolutionChainDetails: [EvolutionChainDetail]
+
     var body: some View {
         
         VStack(alignment: .leading) {
             Text("Evolution Chain")
                 .font(.system(size: 20))
+                .setForegroundColor()
             
             HStack {
-                ForEach(pokemonDetailVM.evolutionChainDetails, id: \.self) { detail in
+                ForEach(evolutionChainDetails, id: \.self) { detail in
                     ZStack {
                         KFImage(URL(string: detail.imageUrl))
                             .resizable()
                             .scaledToFit().padding(.all, 10)
-                        
                     }
                     .frame(width: 84, height: 117)
                     .background(
@@ -38,7 +38,7 @@ struct EvolutionChainView: View {
                             .foregroundColor(.black)
                     )
                     .background(Color("cellBackground"))
-                    if pokemonDetailVM.evolutionChainDetails.count > 1 && detail.id != pokemonDetailVM.evolutionChainDetails.last?.id {
+                    if evolutionChainDetails.count > 1 && detail.id != evolutionChainDetails.last?.id {
                         Image(systemName: "arrow.right")
                             .foregroundColor(.black)
                     }
@@ -47,6 +47,6 @@ struct EvolutionChainView: View {
         }
     }
 }
-#Preview {
-    EvolutionChainView()
-}
+//#Preview {
+//    EvolutionChainView()
+//}

@@ -38,7 +38,7 @@ struct PokemonView: View {
                 GeneralPropertyView()
 
                 StatsView(statItems: detail.getStatItems())
-//                EvolutionChainView()
+                EvolutionChainView(evolutionChainDetails: vm.pageData.evolutionChainDetails)
 
                 GeometryReader { geometry in
                     HStack{

@@ -13,12 +13,8 @@ struct PokemonDetailView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-//        AsyncContentView(source: viewModel) { pokemonDesc in
-            
             TabView(selection: $viewModel.currentPageIndex) {
                 ForEach(viewModel.pages, id: \.self) { page in
-//                    AsyncContentView(source: viewModel) { detail in
-                        
                         PokemonView(pokemonId: page){
                             dismiss()
                         }
@@ -27,10 +23,8 @@ struct PokemonDetailView: View {
                     }
                 }
                 .environmentObject(viewModel)
-//            }
             .background(Color("backgroundColor"))
             .animation(.easeInOut, value: viewModel.currentPageIndex)
             .tabViewStyle(.page(indexDisplayMode: .never))
-//        }
     }
 }

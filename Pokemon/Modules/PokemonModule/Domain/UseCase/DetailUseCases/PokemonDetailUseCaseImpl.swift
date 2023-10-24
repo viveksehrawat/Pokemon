@@ -30,7 +30,7 @@ class PokemonDetailUseCaseImpl: IPokemonDetailUseCase {
         let pokemonWeakness = try await self.pokemonDetailRepository.fetchPokemonWeakness(for: value)
         return pokemonWeakness
     }
-    func fetchPokemonEvolutionCahin(for url: String) async throws -> EvolutionChain{
+    func fetchPokemonEvolutionChain(for url: String) async throws -> EvolutionChain{
         let evolution = try await self.pokemonDetailRepository.fetchPokemonEvolutionChain(for: url)
         return evolution
     }

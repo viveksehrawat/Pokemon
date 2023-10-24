@@ -14,6 +14,6 @@ protocol IPokemonDetailUseCase {
     func fetchPokemonDetail(for name: String) async throws -> PokemonDetail
     func fetchPokemonDescription(for id: Int) async throws -> PokemonDescription
     func fetchPokemonWeakness(for value: Int) async throws -> PokemonWeakness
-    func fetchPokemonEvolutionCahin(for url: String) async throws -> EvolutionChain
+    func fetchPokemonEvolutionChain(for url: String) async throws -> EvolutionChain
     
 }
