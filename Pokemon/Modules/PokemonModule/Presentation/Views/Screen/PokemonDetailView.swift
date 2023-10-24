@@ -13,21 +13,24 @@ struct PokemonDetailView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        AsyncContentView(source: viewModel) { pokemonDesc in
+//        AsyncContentView(source: viewModel) { pokemonDesc in
             
-            TabView(selection: $viewModel.currentIndex) {
+            TabView(selection: $viewModel.currentPageIndex) {
                 ForEach(viewModel.pages, id: \.self) { page in
-                    PokemonView(pokemonId: page){
-                        dismiss()
+//                    AsyncContentView(source: viewModel) { detail in
+                        
+                        PokemonView(pokemonId: page){
+                            dismiss()
+                        }
+                        .tag(page)
+                        .gesture(DragGesture())
                     }
-                    .tag(page)
-                    .gesture(DragGesture())
                 }
                 .environmentObject(viewModel)
-            }
+//            }
             .background(Color("backgroundColor"))
-            .animation(.easeInOut, value: viewModel.currentIndex)
+            .animation(.easeInOut, value: viewModel.currentPageIndex)
             .tabViewStyle(.page(indexDisplayMode: .never))
-        }
+//        }
     }
 }

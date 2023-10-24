@@ -19,8 +19,11 @@ struct HeaderView: View {
                 Text(title)
                     .font(.system(size: 40))
                     .bold()
+                    .setForegroundColor()
                 Text(number)
                     .font(.system(size: 25))
+                    .setForegroundColor()
+
                 
             }
 //            .padding(.top, 10)

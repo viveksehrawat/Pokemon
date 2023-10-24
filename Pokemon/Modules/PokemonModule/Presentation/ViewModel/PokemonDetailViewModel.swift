@@ -8,15 +8,36 @@
 import Foundation
 import UIKit
 
+class PokemonDetailData {
+     var pokemonDetail: PokemonDetail?
+//     var pokemonDescription: PokemonDescription?
+//     var pokemonWeakness: PokemonWeakness?
+//     var pokemonEvolutionChain: EvolutionChain?
+//     var detailImage: UIImage =  UIImage()
+//     var evolutionChainDetails: [EvolutionChainDetail] = []
+//
+//    @Sorted(by: \.id) private var evolutionChainPokemonDetails: [PokemonDetail] = []
+}
+
+enum DetailLoadingState {
+    case idle
+    case loading
+    case failed(Error)
+    case loaded
+}
 
 class PokemonDetailViewModel: LoadableObject{
     
-    typealias Output = PokemonDescription
+    typealias Output = PokemonDetailData
+    @Published var pageData: PokemonDetailData = PokemonDetailData()
+    
+    @Published var detailState = DetailLoadingState.idle
     
     @Published var state = LoadingState<Output>.idle
-    @Published var pokemon: PokemonDetail?
     
     @Published var pokemonDescription: PokemonDescription?
+
+    @Published var pokemonDetail: PokemonDetail?
     @Published var pokemonWeakness: PokemonWeakness?
     @Published var pokemonEvolutionChain: EvolutionChain?
     @Published var detailImage: UIImage =  UIImage()
@@ -25,50 +46,61 @@ class PokemonDetailViewModel: LoadableObject{
     @Sorted(by: \.id) private var evolutionChainPokemonDetails: [PokemonDetail] = []
     
     private let useCase: IPokemonDetailUseCase
-    var currentIndex: Int
-    var pages: [Int]
-    var currentName: String
-    
-    init(useCase: IPokemonDetailUseCase, totalPages: Int, selectedIndex: Int, selectedName: String) {
-        self.useCase = useCase
-        self.pages = Array(1...totalPages)
-        self.currentIndex = selectedIndex
-        self.currentName = selectedName
-    }
-    
-    var pokemonDetail: PokemonDetail! {
-        didSet {
-            evolutionChainPokemonDetails.append(pokemonDetail)
-         //   image(url: pokemonDetail.imageUrl) {self.detailImage = $0}
+    @Published var currentPageIndex: Int
 
-        }
+    var pages: [Int] = []
+    var currentName: String = ""
+    var pokemons: [Pokemon]
+    
+    init(useCase: IPokemonDetailUseCase, selectedIndex: Int, allPokemons: [Pokemon]) {
+        self.useCase = useCase
+        self.currentPageIndex = selectedIndex
+        self.pokemons = allPokemons
+        self.pages = Array(0...allPokemons.count)
+
     }
+    
+//    var pokemonDetail: PokemonDetail! {
+//        didSet {
+//            evolutionChainPokemonDetails.append(pokemonDetail)
+//        }
+//    }
     
     @MainActor
     func load(){
+        self.currentName = pokemons[currentPageIndex].name
+
         state = .loading
         Task{
             do {
                 
-                let itemDetail = try await self.useCase.fetchPokemonDetail(for: currentName)
-                
-                let pokDesc = try await useCase.fetchPokemonDescription(for: currentIndex)
-                let pokWeakness = try await useCase.fetchPokemonWeakness(for: currentIndex)
-                let pokEvolutionChain = try await useCase.fetchPokemonEvolutionCahin(for: pokDesc.evolutionChain.url )
-                pokemonDetail = itemDetail
-                pokemonDescription = pokDesc
-                pokemonWeakness = pokWeakness
-                pokemonEvolutionChain = pokEvolutionChain
-                
-                await getEvolutionChainPokemonDetails()
-                
-                state = .loaded(pokDesc)
+                let pokDetail = try await getPokemonDetail(for: currentName)
+                pokemonDetail = pokDetail
+//                let pokDesc = try await useCase.fetchPokemonDescription(for: currentIndex)
+//                let pokWeakness = try await useCase.fetchPokemonWeakness(for: currentIndex)
+//                let pokEvolutionChain = try await useCase.fetchPokemonEvolutionCahin(for: pokDesc.evolutionChain.url )
+//                pokemonDescription = pokDesc
+//                pokemonWeakness = pokWeakness
+//                pokemonEvolutionChain = pokEvolutionChain
+//                
+//                await getEvolutionChainPokemonDetails()
+
+                pageData.pokemonDetail = pokDetail
+                state = .loaded(pageData)
                 
             } catch {
                 state = .failed(error)
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func getPokemonDetail(for name: String) async throws -> PokemonDetail{
+        return try await self.useCase.fetchPokemonDetail(for: currentName)
+    }
+    
+    func getPokemonDescription() async throws -> PokemonDescription{
+        return try await self.useCase.fetchPokemonDescription(for: currentPageIndex)
     }
     
     var description: String {
@@ -80,12 +112,12 @@ class PokemonDetailViewModel: LoadableObject{
     }
     
     var height: String {
-        Measurement(value: Double(pokemonDetail.height),
+        Measurement(value: Double(pokemonDetail?.height ?? 0),
                     unit: UnitLength.decimeters).converted(to: .feet).formatted()
     }
     
     var weight: String {
-        String(describing: Measurement(value: Double(pokemonDetail.weight) / 10, unit: UnitMass.kilograms))
+        String(describing: Measurement(value: Double(pokemonDetail?.weight ?? 0) / 10, unit: UnitMass.kilograms))
     }
     
     var eggGroups: String {
@@ -109,7 +141,7 @@ class PokemonDetailViewModel: LoadableObject{
     var abilities: String {
         var abilities: String = ""
         
-        pokemonDetail.abilities.forEach({ ability in
+        pokemonDetail?.abilities.forEach({ ability in
             if abilities == "" {
                 abilities = "\(ability.ability.name.localizedCapitalized)"
             } else {
@@ -138,17 +170,15 @@ class PokemonDetailViewModel: LoadableObject{
     
     
     func getStatItems() -> [StatItem] {
-        pokemonDetail.stats.map {
+        pokemonDetail?.stats.map {
             StatItem(title: $0.stat.name, progress: Float($0.baseStat))
-        }
+        } ?? []
     }
     
     
     @MainActor
     private func getEvolutionChainPokemonDetails() async {
-        let chainList = self.getEvolutionChainList().filter { $0.name.caseInsensitiveCompare(pokemonDetail.name) != .orderedSame }
-        print("=**************")
-        print(chainList.count)
+        let chainList = self.getEvolutionChainList().filter { $0.name.caseInsensitiveCompare(pokemonDetail?.name ?? "") != .orderedSame }
         
         do {
              try await withThrowingTaskGroup(of: PokemonDetail.self) { taskGroup in
@@ -164,10 +194,7 @@ class PokemonDetailViewModel: LoadableObject{
             }
                  
             for try await detail in taskGroup {
-//                await MainActor.run {
-                    evolutionChainPokemonDetails.append(detail)
-                   
-//                }
+                evolutionChainPokemonDetails.append(detail)
             }
                  
                  self.evolutionChainPokemonDetails.forEach({ detail in
@@ -197,12 +224,16 @@ class PokemonDetailViewModel: LoadableObject{
     }
     
     
+    @MainActor 
     func goToNextPage() {
-        currentIndex += 1
+        currentPageIndex += 1
+        state = .idle
     }
     
     func goToPrevious() {
-        currentIndex -= 1
+        currentPageIndex -= 1
+        state = .idle
+
     }
     
 }

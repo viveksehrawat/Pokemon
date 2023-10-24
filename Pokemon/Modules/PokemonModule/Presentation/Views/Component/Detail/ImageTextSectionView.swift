@@ -16,7 +16,7 @@ struct ImageTextSectionView: View {
             //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png
 
 //            let s = print(pokemonDetailVM.pokemonDetail.imageUrl)
-            KFImage(URL(string: pokemonDetailVM.pokemonDetail.imageUrl))
+            KFImage(URL(string: pokemonDetailVM.pokemonDetail?.imageUrl ?? ""))
                 .resizable()
                 .scaledToFit()
                 .frame(height: 250)

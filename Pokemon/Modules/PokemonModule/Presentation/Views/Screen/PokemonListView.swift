@@ -56,9 +56,8 @@ struct PokemonListView: View {
     private func generatePokemonViewModel() -> PokemonDetailViewModel {
         let viewModel = PokemonDetailViewModel(
             useCase: generatePokemonUseCase(),
-            totalPages: viewModel.filteredPokemon.count,
-            selectedIndex: viewModel.selectedPokemonIndex + 1,
-            selectedName: viewModel.filteredPokemon[viewModel.selectedPokemonIndex].name
+            selectedIndex: viewModel.selectedPokemonIndex,
+            allPokemons: viewModel.filteredPokemon
         )
 
         return viewModel

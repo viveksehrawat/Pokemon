@@ -38,7 +38,6 @@ struct EvolutionChainView: View {
                             .foregroundColor(.black)
                     )
                     .background(Color("cellBackground"))
-                    var fds = print("total \(pokemonDetailVM.evolutionChainDetails.count)")
                     if pokemonDetailVM.evolutionChainDetails.count > 1 && detail.id != pokemonDetailVM.evolutionChainDetails.last?.id {
                         Image(systemName: "arrow.right")
                             .foregroundColor(.black)
