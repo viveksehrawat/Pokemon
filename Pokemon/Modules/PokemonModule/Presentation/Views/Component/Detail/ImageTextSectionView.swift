@@ -31,7 +31,6 @@ struct ImageTextSectionView: View {
                 .font(.system(size: 18))
                 .setForegroundColor()
                 .lineLimit(10)
-
         }
         .frame(height: 200)
     }

@@ -37,7 +37,7 @@ struct PokemonView: View {
                 ImageTextSectionView()
                 GeneralPropertyView()
 
-//                StatsView(statItems: vm.getStatItems())
+                StatsView(statItems: detail.getStatItems())
 //                EvolutionChainView()
 
                 GeometryReader { geometry in

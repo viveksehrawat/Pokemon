@@ -39,11 +39,12 @@ struct StatsView: View {
                 .font(.system(size: 25))
                 .bold()
                 .padding(.vertical, 10)
-            LazyVGrid(columns: [GridItem()], alignment: .center) {
+            LazyVGrid(columns: [GridItem()], alignment: .center, spacing: 20) {
                 ForEach(statItems, id: \.self) { statItem in
                     HStack(alignment: .center){
                         Text(statItem.title.capitalized)
                             .font(.system(size: 12))
+                            .setForegroundColor()
                             .padding(.trailing, 20)
                             .frame(width: 120, alignment: .leading)
                         BarView(percentage: statItem.progress)
@@ -67,11 +68,11 @@ struct BarView: View {
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
                     Rectangle()
-                        .frame(width: geometry.size.width, height: 15)
+                        .frame(width: geometry.size.width, height: 12)
                         .foregroundColor(Color.gray)
 
                     Rectangle()
-                        .frame(width: CGFloat(percentage) * geometry.size.width / 100, height: 15)
+                        .frame(width: CGFloat(percentage) * geometry.size.width / 100, height: 12)
                         .foregroundColor(Color("filterBackgroundColor"))
 
                     Text(String(format: "%.1f%%", percentage))

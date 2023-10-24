@@ -80,12 +80,16 @@ class PokemonDetailData {
         if pokemonDescription?.genderRate == 8 {
             return "Female"
         }
-        
         if [1, 2, 4, 6, 7].contains( pokemonDescription?.genderRate) {
             return genders.dropLast().joined(separator: ",")
         }
-        
         return ""
+    }
+    
+    func getStatItems() -> [StatItem] {
+        pokemonDetail?.stats.map {
+            StatItem(title: $0.stat.name, progress: Float($0.baseStat))
+        } ?? []
     }
     
 }
@@ -145,21 +149,21 @@ class PokemonDetailViewModel: LoadableObject{
         Task{
             do {
                 
-                let detail = try await getPokemonDetail(for: currentName)
-                let desc = try await getPokemonDescription(id: currentPageIndex + 1)
-                let weakness = try await getPokemonWeakness(id: currentPageIndex + 1)
+                pageData.pokemonDetail = try await getPokemonDetail(for: currentName)
+                pageData.pokemonDescription = try await getPokemonDescription(id: currentPageIndex + 1)
+                pageData.pokemonWeakness = try await getPokemonWeakness(id: currentPageIndex + 1)
 //                let pokEvolutionChain = try await useCase.fetchPokemonEvolutionCahin(for: pokDesc.evolutionChain.url )
                 
-                pokemonDetail = detail
-                pokemonDescription = desc
-                pokemonWeakness = weakness
+//                pokemonDetail = detail
+//                pokemonDescription = desc
+//                pokemonWeakness = weakness
 //                pokemonEvolutionChain = pokEvolutionChain
 //                
 //                await getEvolutionChainPokemonDetails()
 
-                pageData.pokemonDetail = detail
-                pageData.pokemonDescription = desc
-                pageData.pokemonWeakness = weakness
+//                pageData.pokemonDetail = detail
+//                pageData.pokemonDescription = desc
+//                pageData.pokemonWeakness = weakness
 
                 state = .loaded(pageData)
                 
@@ -182,20 +186,12 @@ class PokemonDetailViewModel: LoadableObject{
         try await useCase.fetchPokemonWeakness(for: id)
     }
     
-    
-  
-    
-  
-    
-   
-    
-   
-    
-    func getStatItems() -> [StatItem] {
-        pokemonDetail?.stats.map {
-            StatItem(title: $0.stat.name, progress: Float($0.baseStat))
-        } ?? []
+    func getPokemonEvolution(id: Int) async throws -> PokemonWeakness{
+        try await useCase.fetchPokemonWeakness(for: id)
     }
+    
+    
+   
     
     
     @MainActor
