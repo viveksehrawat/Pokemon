@@ -13,7 +13,7 @@ struct ItemView: View {
     let subTitle: String
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 10) {
             Text(title)
                 .font(.system(size: 18))
                 .setForegroundColor()
@@ -22,8 +22,6 @@ struct ItemView: View {
             Text(subTitle)
                 .font(.system(size: 15))
                 .setForegroundColor()
-
-
         }
     }
 }

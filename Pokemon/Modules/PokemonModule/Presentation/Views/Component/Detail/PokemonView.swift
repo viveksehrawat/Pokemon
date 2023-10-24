@@ -36,28 +36,7 @@ struct PokemonView: View {
                 }, title: detail.pokemonDetail?.name.uppercased() ?? "", number: String(format: "%03d", detail.pokemonDetail?.id ?? 0))
                 ImageTextSectionView()
                 GeneralPropertyView()
-//                HStack{
-//                    ItemView(title: "Height", subTitle: vm.height)
-//                    Spacer()
-//                    ItemView(title: "Weight", subTitle: vm.weight)
-//                }
 
-//                HStack{
-//                    ItemView(title: "Gender(s)", subTitle: vm.genders)
-//                    Spacer()
-//                    ItemView(title: "Egg Groups", subTitle: vm.eggGroups)
-//                    
-//                }
-
-//                HStack{
-//                    ItemView(title: "Ablities", subTitle:vm.abilities)
-//                    Spacer()
-//                    QualityView(title: "Types", data: vm.typeNames)
-//
-//                }
-
-//                QualityView(title: "Weak Against", data: vm.getAllWeaknesses())
-//
 //                StatsView(statItems: vm.getStatItems())
 //                EvolutionChainView()
 

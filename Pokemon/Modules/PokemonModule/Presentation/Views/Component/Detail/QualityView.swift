@@ -14,12 +14,11 @@ struct QualityView: View {
 
     var body: some View {
         
-        VStack(alignment: .leading){
+        VStack(alignment: .leading, spacing: 10){
             Text(title)
                 .font(.system(size: 18))
                 .setForegroundColor()
                 .bold()
-//            Spacer(minLength: 30)
             LazyHGrid(rows: [GridItem(.flexible())], spacing: 10) {
                 ForEach(data, id: \.self) { type in
                     PokemonCapsuleView(type: PokemonType(rawValue: type) ?? .fire)
