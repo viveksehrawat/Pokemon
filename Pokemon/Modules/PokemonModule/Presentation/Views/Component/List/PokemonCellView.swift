@@ -10,7 +10,7 @@ import Kingfisher
 
 struct PokemonCellView: View {
     
-    let pokemon: Pokemon
+    let pokemon: PokemonDetail
     let index: Int
     @EnvironmentObject var vm: PokemonListViewModel
     

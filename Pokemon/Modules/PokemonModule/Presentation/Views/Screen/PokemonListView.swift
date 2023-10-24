@@ -18,7 +18,7 @@ struct PokemonListView: View {
     ]
     
     var body: some View {
-            AsyncContentView(source: viewModel) { pokemons in
+            AsyncContentView(source: viewModel) { pokemonDetails in
                 ScrollView{
                     VStack(alignment: .leading){
                         Text("Pokedex")

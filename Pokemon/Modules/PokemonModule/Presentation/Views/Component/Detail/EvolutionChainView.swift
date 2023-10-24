@@ -41,8 +41,6 @@ struct EvolutionChainView: View {
                     if evolutionChainDetails.count > 1 && detail.id != evolutionChainDetails.last?.id {
                         Image(systemName: "arrow.right")
                             .foregroundColor(.black)
-//                            .frame(width: 50)
-
                     }
                 }
             }

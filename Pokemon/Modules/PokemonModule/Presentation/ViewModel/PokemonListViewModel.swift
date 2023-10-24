@@ -10,10 +10,10 @@ import Foundation
 class PokemonListViewModel: LoadableObject{
     
     private let useCase: IPokemonListUseCase
-    typealias Output = [Pokemon]
+    typealias Output = [PokemonDetail]
 
     @Published var state = LoadingState<Output>.idle
-    @Published var pokemons: [Pokemon] = [Pokemon]()
+    private var pokemons: [Pokemon] = [Pokemon]()
     @Published var searchText = ""
     @Published var selectedPokemonIndex = 0
     @Sorted(by: \.id) var detailItems: [PokemonDetail] = []
@@ -23,28 +23,29 @@ class PokemonListViewModel: LoadableObject{
         self.useCase = useCase
     }
     
-    var filteredPokemon : [Pokemon] {
-        return searchText == "" ? pokemons : pokemons.filter { $0.name.contains(searchText.lowercased())
+    var filteredPokemon : [PokemonDetail] {
+        if searchText == "" { return detailItems}
+    
+        if let searchId = Int(searchText) {
+            return  detailItems.filter { $0.id == searchId }
+        }else{
+            return  detailItems.filter { $0.name.contains(searchText.lowercased())
+            }
         }
+        
     }
     
-    // Get the index of a pokemon
-    func getPokemonIndex(pokemon: Pokemon) -> Int {
-        if let index = self.pokemons.firstIndex(of: pokemon){
-            return index + 1
-        }
-        return 0
-    }
     
     @MainActor
     func load(){
         state = .loading
         Task{
             do {
-                let result = try await useCase.fetchPokemonList()
-                 await fetchPokemonDetails(for: result)
-//                state = .loaded(result)
-//                pokemons = result
+                
+                let page = try await useCase.fetchPokemonList()
+                pokemons = page.pokemons
+                await fetchPokemonDetails(for: page)
+                
             } catch {
                 state = .failed(error)
                 print(error.localizedDescription)
@@ -53,9 +54,9 @@ class PokemonListViewModel: LoadableObject{
     }
     
     @MainActor
-    private func fetchPokemonDetails(for page: PokemonPage) async   {
+    private func fetchPokemonDetails(for page: PokemonPage) async {
         let pokemonList = page.pokemons
-        /*
+        
         do {
         // Create a task group to fetch Pokemon details concurrently
             try await withThrowingTaskGroup(of: PokemonDetail.self) { taskGroup in
@@ -75,14 +76,15 @@ class PokemonListViewModel: LoadableObject{
                     self.detailItems.append(result)
                 }
             }
+            state = .loaded(detailItems)
         } catch {
             print("Error loading Pokemon details: \(error.localizedDescription)")
             state = .failed(error)
             }
         
-        */
+        
         pokemons = pokemonList
-        state = .loaded(pokemonList)
+        state = .loaded(detailItems)
 //        self.appendPage(page, details: self.detailItems)
     }
 
