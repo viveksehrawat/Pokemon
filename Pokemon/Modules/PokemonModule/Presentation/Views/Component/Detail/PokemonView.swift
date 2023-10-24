@@ -43,14 +43,14 @@ struct PokemonView: View {
                 GeometryReader { geometry in
                     HStack{
                         if vm.currentPageIndex != 0 {
-                           AppButton(title: "Previous") {
+                            AppButton(title: "Previous", isNextButton: false) {
                                vm.goToPrevious()
                            }
                         }
                         
                         Spacer()
                         if vm.currentPageIndex != vm.pokemons.endIndex - 1 {
-                            AppButton(title: "Next") {
+                            AppButton(title: "Next", isNextButton: true) {
                                 vm.goToNextPage()
                             }
                         }
