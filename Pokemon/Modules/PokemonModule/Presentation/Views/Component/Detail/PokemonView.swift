@@ -36,27 +36,9 @@ struct PokemonView: View {
                 }, title: detail.pokemonDetail?.name.uppercased() ?? "", number: String(format: "%03d", detail.pokemonDetail?.id ?? 0))
                 ImageTextSectionView()
                 GeneralPropertyView()
-
                 StatsView(statItems: detail.getStatItems())
                 EvolutionChainView(evolutionChainDetails: vm.pageData.evolutionChainDetails)
-
-                GeometryReader { geometry in
-                    HStack{
-                        if vm.currentPageIndex != 0 {
-                            AppButton(title: "Previous", isNextButton: false) {
-                               vm.goToPrevious()
-                           }
-                        }
-                        
-                        Spacer()
-                        if vm.currentPageIndex != vm.pokemons.endIndex - 1 {
-                            AppButton(title: "Next", isNextButton: true) {
-                                vm.goToNextPage()
-                            }
-                        }
-                       
-                    }
-                }
+                FooterButtonView()
                 Spacer(minLength: 30)
             }
         }

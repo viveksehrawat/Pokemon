@@ -29,6 +29,7 @@
 		4382608E2AE5702B005D9723 /* QualityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4382608D2AE5702B005D9723 /* QualityView.swift */; };
 		438260902AE78648005D9723 /* GeneralPropertyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4382608F2AE78648005D9723 /* GeneralPropertyView.swift */; };
 		438260922AE79392005D9723 /* PokemonPageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438260912AE79392005D9723 /* PokemonPageData.swift */; };
+		438260942AE7B5AB005D9723 /* FooterButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438260932AE7B5AB005D9723 /* FooterButtonView.swift */; };
 		4390CBEE2AE13FAE00F76E2A /* PokemonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390CBED2AE13FAE00F76E2A /* PokemonApp.swift */; };
 		4390CBF22AE13FB000F76E2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4390CBF12AE13FB000F76E2A /* Assets.xcassets */; };
 		4390CBF52AE13FB000F76E2A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4390CBF42AE13FB000F76E2A /* Preview Assets.xcassets */; };
@@ -93,6 +94,7 @@
 		4382608D2AE5702B005D9723 /* QualityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualityView.swift; sourceTree = "<group>"; };
 		4382608F2AE78648005D9723 /* GeneralPropertyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPropertyView.swift; sourceTree = "<group>"; };
 		438260912AE79392005D9723 /* PokemonPageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonPageData.swift; sourceTree = "<group>"; };
+		438260932AE7B5AB005D9723 /* FooterButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterButtonView.swift; sourceTree = "<group>"; };
 		4390CBEA2AE13FAE00F76E2A /* Pokemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pokemon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4390CBED2AE13FAE00F76E2A /* PokemonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonApp.swift; sourceTree = "<group>"; };
 		4390CBF12AE13FB000F76E2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				43189CB12AE240D200B7964E /* StatsView.swift */,
 				438260752AE37DA4005D9723 /* EvolutionChainView.swift */,
 				43189CB72AE24C9D00B7964E /* PokemonCapsuleView.swift */,
+				438260932AE7B5AB005D9723 /* FooterButtonView.swift */,
 				43189CB92AE25F0400B7964E /* PokemonView.swift */,
 			);
 			path = Detail;
@@ -630,6 +633,7 @@
 				43189CB82AE24C9D00B7964E /* PokemonCapsuleView.swift in Sources */,
 				438260882AE50D2D005D9723 /* PokemonDescriptionDTO.swift in Sources */,
 				4390CC4D2AE15A7400F76E2A /* PokemonCellView.swift in Sources */,
+				438260942AE7B5AB005D9723 /* FooterButtonView.swift in Sources */,
 				4382607E2AE382C9005D9723 /* PokemonDetailUseCaseImpl.swift in Sources */,
 				4390CC412AE156D000F76E2A /* IPokemonRepository.swift in Sources */,
 				438260842AE38FF8005D9723 /* PokemonDetailDTO.swift in Sources */,
