@@ -75,11 +75,13 @@ struct PokemonCellView: View {
         }
         .frame(height: 250)
         .background(
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: 12)
                 .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
                 .foregroundColor(.black)
         )
         .addGradient(colors: gradientColors)
+        .cornerRadius(12)
+
     }
 }
 
