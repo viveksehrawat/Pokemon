@@ -11,7 +11,7 @@ struct QualityView: View {
     
     let title: String
     let data: [String]
-
+    
     var body: some View {
         
         VStack(alignment: .leading, spacing: 10){

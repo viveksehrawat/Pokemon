@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HeaderView: View {
-
+    
     var dismiss: ()-> Void
     var title: String
     var number: String
@@ -23,10 +23,7 @@ struct HeaderView: View {
                 Text(number)
                     .font(.system(size: 25))
                     .setForegroundColor()
-
-                
             }
-//            .padding(.top, 10)
             Spacer()
             Button{
                 dismiss()
@@ -42,6 +39,5 @@ struct HeaderView: View {
 
 #Preview {
     HeaderView(dismiss: {
-
     }, title: "Pokemon", number: "007")
 }

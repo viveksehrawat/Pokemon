@@ -18,12 +18,6 @@ struct EvolutionChainDetail: Hashable, Identifiable {
 struct EvolutionChainView: View {
     
     var evolutionChainDetails: [EvolutionChainDetail]
-    
-//    private var gradientColors: [Color] {
-//        let types = pokemon.types
-//        let name = types.map {$0.color}
-//        return name
-//    }
 
     var body: some View {
         

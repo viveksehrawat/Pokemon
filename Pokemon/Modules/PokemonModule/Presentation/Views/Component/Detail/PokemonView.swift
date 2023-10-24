@@ -7,15 +7,7 @@
 
 import SwiftUI
 
-extension Color {
-    static let labelGrayColor = Color(hex: "#2E3156")
-}
 
-extension Text {
-    func setForegroundColor() -> Self {
-        return self.foregroundColor(.labelGrayColor)
-    }
-}
 
 
 struct PokemonView: View {
@@ -24,35 +16,35 @@ struct PokemonView: View {
     
     var pokemonId: Int
     var dismiss: () -> Void
-        
+    
     var body: some View {
         
         AsyncContentView(source: vm) { detail in
-
+            
             ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 30){
-                
-                HeaderView(dismiss: {
-                    dismiss()
-                }, title: detail.pokemonDetail?.name.uppercased() ?? "", number: String(format: "%03d", detail.pokemonDetail?.id ?? 0))
-                if let pokemonDetail = detail.pokemonDetail {
-                    ImageTextSectionView(description: detail.description, pokemon: pokemonDetail)
+                VStack(alignment: .leading, spacing: 30){
+                    
+                    HeaderView(dismiss: {
+                        dismiss()
+                    }, title: detail.pokemonDetail?.name.uppercased() ?? "", number: String(format: "%03d", detail.pokemonDetail?.id ?? 0))
+                    if let pokemonDetail = detail.pokemonDetail {
+                        ImageTextSectionView(description: detail.description, pokemon: pokemonDetail)
+                    }
+                    
+                    GeneralPropertyView()
+                    StatsView(statItems: detail.getStatItems())
+                    EvolutionChainView(evolutionChainDetails: vm.pageData.evolutionChainDetails)
+                    FooterButtonView()
+                    Spacer(minLength: 30)
                 }
+            }
+            .padding(.horizontal, 30)
+            .background(Color("backgroundColor"))
+            .task {
                 
-                GeneralPropertyView()
-                StatsView(statItems: detail.getStatItems())
-                EvolutionChainView(evolutionChainDetails: vm.pageData.evolutionChainDetails)
-                FooterButtonView()
-                Spacer(minLength: 30)
             }
         }
-        .padding(.horizontal, 30)
-        .background(Color("backgroundColor"))
-        .task {
-            
-        }
     }
-}
 }
 
 #Preview {

@@ -8,32 +8,21 @@
 import SwiftUI
 import Kingfisher
 
-extension View {
 
-    func addGradient(colors: [Color]) -> some View {
-        let gradient = LinearGradient(gradient: Gradient(colors: colors), startPoint: .top, endPoint: .bottom)
-        return self.background(gradient)
-    }
-
-    func removeGradient() -> some View {
-        return self
-    }
-}
 
 struct PokemonCellView: View {
     
     let pokemon: PokemonDetail
     let index: Int
-    @EnvironmentObject var vm: PokemonListViewModel
     
     private var gradientColors: [Color] {
         let types = pokemon.types
         let name = types.map {$0.color}
         return name
     }
-
+    
     var body: some View {
-
+        
         VStack {
             
             KFImage(URL(string: pokemon.imageUrl)!)
@@ -48,7 +37,7 @@ struct PokemonCellView: View {
             Text(String(format: "%03d", pokemon.id))
                 .font(.system(size: 15))
                 .foregroundColor(.black)
-
+            
         }
         .frame(height: 250)
         .background(
@@ -58,7 +47,6 @@ struct PokemonCellView: View {
         )
         .addGradient(colors: gradientColors)
         .cornerRadius(12)
-
     }
 }
 

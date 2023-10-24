@@ -40,7 +40,6 @@ class PokemonDetailViewModel: LoadableObject{
         self.pokemons = allPokemons
         self.pages = Array(0...allPokemons.count)
         details = Array(repeating: DetailData(state: .idle, data: PokemonDetailData()), count: allPokemons.count)
-        
     }
     
     @MainActor

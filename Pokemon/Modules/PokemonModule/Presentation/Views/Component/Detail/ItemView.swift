@@ -11,7 +11,7 @@ struct ItemView: View {
     
     let title: String
     let subTitle: String
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(title)

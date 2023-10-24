@@ -11,28 +11,28 @@ class StatItem: Hashable, Identifiable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-
+    
     public static func == (lhs: StatItem, rhs: StatItem) -> Bool {
         lhs.title == rhs.title
     }
-
+    
     public var id: ObjectIdentifier {
         ObjectIdentifier(self)
     }
-
+    
     init(title: String, progress: Float) {
         self.title = title
         self.progress = progress
     }
-
+    
     var title: String
     let progress: Float
 }
 
 struct StatsView: View {
-
+    
     let statItems: [StatItem]
-
+    
     var body: some View {
         VStack(alignment: .leading){
             Text("Stats")
@@ -66,24 +66,24 @@ struct BarView: View {
     let percentage: Float
     
     var body: some View {
-            GeometryReader { geometry in
-                ZStack(alignment: .leading) {
-                    Rectangle()
-                        .frame(width: geometry.size.width, height: 12)
-                        .foregroundColor(Color.gray)
-
-                    Rectangle()
-                        .frame(width: CGFloat(percentage) * geometry.size.width / 100, height: 12)
-                        .foregroundColor(Color("filterBackgroundColor"))
-
-                    Text(String(format: "%.1f%%", percentage))
-                        .font(.system(size: 10))
-                        .foregroundColor(.white)
-                        .padding(.leading, 5)
-                }
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                Rectangle()
+                    .frame(width: geometry.size.width, height: 12)
+                    .foregroundColor(Color.gray)
+                
+                Rectangle()
+                    .frame(width: CGFloat(percentage) * geometry.size.width / 100, height: 12)
+                    .foregroundColor(Color("filterBackgroundColor"))
+                
+                Text(String(format: "%.1f%%", percentage))
+                    .font(.system(size: 10))
+                    .foregroundColor(.white)
+                    .padding(.leading, 5)
             }
         }
     }
-    
+}
+
 
 

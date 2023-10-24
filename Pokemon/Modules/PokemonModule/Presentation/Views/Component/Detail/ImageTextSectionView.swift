@@ -9,10 +9,10 @@ import SwiftUI
 import Kingfisher
 
 struct ImageTextSectionView: View {
-
+    
     let description: String
     let pokemon: PokemonDetail
-
+    
     private var gradientColors: [Color] {
         let types = pokemon.types
         let name = types.map {$0.color}

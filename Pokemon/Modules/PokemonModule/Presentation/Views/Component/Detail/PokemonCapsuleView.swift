@@ -18,9 +18,9 @@ struct PokemonCapsuleView: View {
             .padding(.all, 8)
             .background(type.color)
             .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(.black, lineWidth: 1)
-                )
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(.black, lineWidth: 1)
+            )
             .cornerRadius(8)
             .frame(height: 20)
     }

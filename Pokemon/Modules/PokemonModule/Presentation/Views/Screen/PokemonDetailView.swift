@@ -13,18 +13,18 @@ struct PokemonDetailView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-            TabView(selection: $viewModel.currentPageIndex) {
-                ForEach(viewModel.pages, id: \.self) { page in
-                        PokemonView(pokemonId: page){
-                            dismiss()
-                        }
-                        .tag(page)
-                        .gesture(DragGesture())
-                    }
+        TabView(selection: $viewModel.currentPageIndex) {
+            ForEach(viewModel.pages, id: \.self) { page in
+                PokemonView(pokemonId: page){
+                    dismiss()
                 }
-                .environmentObject(viewModel)
-            .background(Color("backgroundColor"))
-            .animation(.easeInOut, value: viewModel.currentPageIndex)
-            .tabViewStyle(.page(indexDisplayMode: .never))
+                .tag(page)
+                .gesture(DragGesture())
+            }
+        }
+        .environmentObject(viewModel)
+        .background(Color("backgroundColor"))
+        .animation(.easeInOut, value: viewModel.currentPageIndex)
+        .tabViewStyle(.page(indexDisplayMode: .never))
     }
 }
