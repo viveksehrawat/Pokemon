@@ -45,7 +45,7 @@ struct PokemonCellView: View {
                 .font(.system(size: 18))
                 .foregroundColor(.black)
                 .bold()
-            Text("\(index + 1)")
+            Text(String(format: "%03d", pokemon.id))
                 .font(.system(size: 15))
                 .foregroundColor(.black)
 
