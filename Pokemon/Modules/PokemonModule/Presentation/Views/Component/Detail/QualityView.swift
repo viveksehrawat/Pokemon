@@ -9,7 +9,6 @@ import SwiftUI
 
 struct QualityView: View {
     
-    @EnvironmentObject var vm: PokemonDetailViewModel
     let title: String
     let data: [String]
 
@@ -18,8 +17,9 @@ struct QualityView: View {
         VStack(alignment: .leading){
             Text(title)
                 .font(.system(size: 18))
+                .setForegroundColor()
                 .bold()
-            Spacer(minLength: 30)
+//            Spacer(minLength: 30)
             LazyHGrid(rows: [GridItem(.flexible())], spacing: 10) {
                 ForEach(data, id: \.self) { type in
                     PokemonCapsuleView(type: PokemonType(rawValue: type) ?? .fire)

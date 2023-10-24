@@ -29,13 +29,13 @@ struct PokemonView: View {
         
         AsyncContentView(source: vm) { detail in
 
-        ScrollView {
+            ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 30){
                 HeaderView(dismiss: {
                     dismiss()
                 }, title: detail.pokemonDetail?.name.uppercased() ?? "", number: String(format: "%03d", detail.pokemonDetail?.id ?? 0))
                 ImageTextSectionView()
-                Spacer(minLength: 30)
+                GeneralPropertyView()
 //                HStack{
 //                    ItemView(title: "Height", subTitle: vm.height)
 //                    Spacer()
@@ -81,7 +81,6 @@ struct PokemonView: View {
                 Spacer(minLength: 30)
             }
         }
-        .scrollIndicators(.hidden)
         .padding(.horizontal, 30)
         .background(Color("backgroundColor"))
         .task {

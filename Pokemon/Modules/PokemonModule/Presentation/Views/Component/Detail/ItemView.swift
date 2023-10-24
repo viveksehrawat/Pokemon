@@ -16,9 +16,13 @@ struct ItemView: View {
         VStack(alignment: .leading, spacing: 4) {
             Text(title)
                 .font(.system(size: 18))
+                .setForegroundColor()
                 .bold()
+            
             Text(subTitle)
                 .font(.system(size: 15))
+                .setForegroundColor()
+
 
         }
     }

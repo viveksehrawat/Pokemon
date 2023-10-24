@@ -14,8 +14,8 @@ struct PokemonCapsuleView: View {
         
         Text(type.rawValue.capitalized)
             .font(.system(size: 15))
+            .setForegroundColor()
             .padding(.all, 8)
-            
             .background(type.color)
             .overlay(
                     RoundedRectangle(cornerRadius: 8)
