@@ -31,10 +31,7 @@ final class URLRequestGeneratorTests: XCTestCase {
             XCTAssertEqual(urlRequest.url?.scheme, "https")
             XCTAssertEqual(urlRequest.url?.host, "pokeapi.co")
             XCTAssertEqual(urlRequest.url?.path, "/api/v2/pokemon")
-
-            print(urlRequest.url)
             XCTAssertEqual(urlRequest.url, URL(string: "https://pokeapi.co/api/v2/pokemon?"))
-
             XCTAssertEqual(urlRequest.httpMethod, HTTPMethod.get.rawValue)
             XCTAssertEqual(urlRequest.allHTTPHeaderFields, ["Content-Type":"application/json"])
             XCTAssertNil(urlRequest.httpBody)

@@ -44,6 +44,8 @@
 		438260B32AE7F057005D9723 /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438260B22AE7F057005D9723 /* JsonReader.swift */; };
 		438260B62AE7F345005D9723 /* MockNetworkManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438260B52AE7F345005D9723 /* MockNetworkManger.swift */; };
 		438260B92AE7F3AC005D9723 /* URLRequestGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438260B82AE7F3AC005D9723 /* URLRequestGeneratorTests.swift */; };
+		438260BC2AE7F620005D9723 /* PokemonListRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438260BB2AE7F620005D9723 /* PokemonListRepositoryTests.swift */; };
+		438260C02AE80083005D9723 /* PokemonDetailRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438260BF2AE80083005D9723 /* PokemonDetailRepositoryTests.swift */; };
 		4390CBEE2AE13FAE00F76E2A /* PokemonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390CBED2AE13FAE00F76E2A /* PokemonApp.swift */; };
 		4390CBF22AE13FB000F76E2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4390CBF12AE13FB000F76E2A /* Assets.xcassets */; };
 		4390CBF52AE13FB000F76E2A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4390CBF42AE13FB000F76E2A /* Preview Assets.xcassets */; };
@@ -122,6 +124,8 @@
 		438260B22AE7F057005D9723 /* JsonReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonReader.swift; sourceTree = "<group>"; };
 		438260B52AE7F345005D9723 /* MockNetworkManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManger.swift; sourceTree = "<group>"; };
 		438260B82AE7F3AC005D9723 /* URLRequestGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestGeneratorTests.swift; sourceTree = "<group>"; };
+		438260BB2AE7F620005D9723 /* PokemonListRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListRepositoryTests.swift; sourceTree = "<group>"; };
+		438260BF2AE80083005D9723 /* PokemonDetailRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailRepositoryTests.swift; sourceTree = "<group>"; };
 		4390CBEA2AE13FAE00F76E2A /* Pokemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pokemon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4390CBED2AE13FAE00F76E2A /* PokemonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonApp.swift; sourceTree = "<group>"; };
 		4390CBF12AE13FB000F76E2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -311,6 +315,31 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		438260BA2AE7F5ED005D9723 /* PokemonModule */ = {
+			isa = PBXGroup;
+			children = (
+				438260BE2AE7F62B005D9723 /* Detail */,
+				438260BD2AE7F625005D9723 /* List */,
+			);
+			path = PokemonModule;
+			sourceTree = "<group>";
+		};
+		438260BD2AE7F625005D9723 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				438260BB2AE7F620005D9723 /* PokemonListRepositoryTests.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		438260BE2AE7F62B005D9723 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				438260BF2AE80083005D9723 /* PokemonDetailRepositoryTests.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		4390CBE12AE13FAE00F76E2A = {
 			isa = PBXGroup;
 			children = (
@@ -357,6 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				4390CBFE2AE13FB100F76E2A /* PokemonTests.swift */,
+				438260BA2AE7F5ED005D9723 /* PokemonModule */,
 				438260B72AE7F396005D9723 /* Networking */,
 				438260B22AE7F057005D9723 /* JsonReader.swift */,
 				438260A62AE7ED0F005D9723 /* Mock */,
@@ -744,7 +774,9 @@
 				438260AA2AE7EF7C005D9723 /* PokemonDetailMockData.swift in Sources */,
 				4382609C2AE7E9CF005D9723 /* PropertyWrapperTests.swift in Sources */,
 				4390CBFF2AE13FB100F76E2A /* PokemonTests.swift in Sources */,
+				438260BC2AE7F620005D9723 /* PokemonListRepositoryTests.swift in Sources */,
 				438260A52AE7ECBF005D9723 /* PokemonWeakness.json in Sources */,
+				438260C02AE80083005D9723 /* PokemonDetailRepositoryTests.swift in Sources */,
 				438260B62AE7F345005D9723 /* MockNetworkManger.swift in Sources */,
 				438260AC2AE7EF93005D9723 /* PokemonDescMockData.swift in Sources */,
 				438260A32AE7EC82005D9723 /* PokemonDescription.json in Sources */,
