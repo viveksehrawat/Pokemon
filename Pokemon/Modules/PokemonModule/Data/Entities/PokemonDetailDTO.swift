@@ -29,7 +29,7 @@ struct PokemonDetailDTO: Decodable {
             name: name,
             order: order,
             species: species.toDomain(),
-            imageUrl: sprites.other?.officialArtwork.frontDefault ?? "",
+            imageUrl: sprites.thumbnail ?? "",
             stats: stats.map {$0.toDomain()},
             weight: weight,
             responseTypes: types.map {$0.type.toDomain()}
@@ -115,6 +115,12 @@ extension PokemonDetailDTO {
     class Sprites: Decodable {
         
         let other: Other?
+        let thumbnail: String?
+       
+        enum CodingKeys: String, CodingKey {
+            case thumbnail = "front_default"
+            case other
+        }
         
         struct Other: Decodable {
             //    let dreamWorld: DreamWorld

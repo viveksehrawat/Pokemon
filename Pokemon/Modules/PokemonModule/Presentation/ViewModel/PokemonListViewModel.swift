@@ -64,7 +64,7 @@ class PokemonListViewModel: LoadableObject{
                 taskGroup.addTask {
                     let name = pokemon.name.lowercased()
                     let itemDetail = try await self.useCase.fetchPokemonDetail(for: name)
-                    print(itemDetail.name)
+//                    print(itemDetail.name)
                     return itemDetail
 
                 }

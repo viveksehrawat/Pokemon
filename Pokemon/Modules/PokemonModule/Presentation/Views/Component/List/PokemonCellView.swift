@@ -8,18 +8,61 @@
 import SwiftUI
 import Kingfisher
 
+extension View {
+
+    func addGradient(colors: [Color]) -> some View {
+        let gradient = LinearGradient(gradient: Gradient(colors: colors), startPoint: .top, endPoint: .bottom)
+        return self.background(gradient)
+    }
+
+    func removeGradient() -> some View {
+        return self
+    }
+}
+
 struct PokemonCellView: View {
     
     let pokemon: PokemonDetail
     let index: Int
     @EnvironmentObject var vm: PokemonListViewModel
     
+    private var gradientColors: [Color] {
+        let types = pokemon.types
+        let name = types.map {$0.color}
+        return name
+    }
+    
+//    var new: some View {
+//        
+//        VStack {
+//            AsyncImage(url: URL(string: (pokemon.imageUrl ?? true) ? "" : pokemon.species.url)) { image in
+//                
+//                VStack {
+//                    image
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+//                    
+//                    Text(pokemon.name)
+//                        .fontWeight(.bold)
+//                        .foregroundColor(.black)
+//                    Spacer()
+//                }
+//            } placeholder: {
+//                ProgressView()
+//            }
+//            .addGradient(colors: gradientColors)
+//        }
+//    }
+
+
     var body: some View {
-        
+
         VStack {
-            KFImage(URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(index).png")!)
+            
+            KFImage(URL(string: pokemon.imageUrl)!)
                 .resizable()
                 .scaledToFit()
+                .frame(width: 128, height: 128)
                 .padding()
             Text(pokemon.name.capitalized)
                 .font(.system(size: 18))
@@ -36,35 +79,7 @@ struct PokemonCellView: View {
                 .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
                 .foregroundColor(.black)
         )
-        .background(Color("cellBackground"))
-
-    }
-    
-    private func thumbnailView() -> some View {
-        
-        GeometryReader { geometry in
-            
-            let thumbURL = URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")
-            
-            return AsyncImage(url: thumbURL) { phase in
-                switch phase {
-                case .empty:
-                    ProgressView()
-                case .success(let image):
-                    image
-                        .resizable()
-                        .scaledToFit()
-                    
-                case .failure:
-                    Image(systemName: "exclamationmark.icloud.fill")
-                        .font(.system(size: 40))
-                        .foregroundColor(.red)
-                    
-                @unknown default:
-                    EmptyView()
-                }
-            }
-        }
+        .addGradient(colors: gradientColors)
     }
 }
 
