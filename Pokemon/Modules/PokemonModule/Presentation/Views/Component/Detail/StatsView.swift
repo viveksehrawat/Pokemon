@@ -36,9 +36,10 @@ struct StatsView: View {
     var body: some View {
         VStack(alignment: .leading){
             Text("Stats")
-                .font(.system(size: 25))
+                .font(.system(size: 20))
+                .setForegroundColor()
                 .bold()
-                .padding(.vertical, 10)
+                .padding(.vertical, 5)
             LazyVGrid(columns: [GridItem()], alignment: .center, spacing: 20) {
                 ForEach(statItems, id: \.self) { statItem in
                     HStack(alignment: .center){
