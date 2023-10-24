@@ -85,7 +85,7 @@ class PokemonDetailViewModel: LoadableObject{
     }
     
     func getPokemonDetail(for name: String) async throws -> PokemonDetail {
-         try await self.useCase.fetchPokemonDetail(for: currentName)
+         try await self.useCase.fetchPokemonDetail(for: name)
     }
     
     func getPokemonDescription(id: Int) async throws -> PokemonDescription{
@@ -110,6 +110,8 @@ class PokemonDetailViewModel: LoadableObject{
                 for specie in chainList {
                     taskGroup.addTask {
                         let detail = try await self.getPokemonDetail(for: specie.name)
+                        print("===========", detail.id)
+
                         return detail
                 }
             }
@@ -119,6 +121,11 @@ class PokemonDetailViewModel: LoadableObject{
             }
                  print("**************")
                  print("**************")
+                 print("********", pageData.evolutionChainPokemonDetails[0].id)
+                 print("********", pageData.evolutionChainPokemonDetails[1].id)
+                 print("********", pageData.evolutionChainPokemonDetails[2].id)
+
+
                  print("********", pageData.evolutionChainPokemonDetails.count)
                  print("**************")
                  print("**************")

@@ -25,7 +25,6 @@ struct FooterButtonView: View {
                         vm.goToNextPage()
                     }
                 }
-               
             }
         }
     }

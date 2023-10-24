@@ -18,22 +18,22 @@ struct AppButton: View {
         Button{
             action()
         } label: {
-            HStack {
+            HStack(alignment: .center ) {
                 if !isNextButton {
                     Image(systemName: "arrow.left")
                         .foregroundColor(.white)
-                        .font(.system(size: 20))
+                        .font(.system(size: 17))
                 }
                 Text(title)
-                    .font(.system(size: 18))
+                    .font(.system(size: 17))
                     .foregroundColor(.white)
                 if isNextButton {
                     Image(systemName: "arrow.right")
                         .foregroundColor(.white)
-                        .font(.system(size: 20))
+                        .font(.system(size: 17))
                 }
             }
-            .frame(width: 130, height: 40)
+            .frame(width: 140, height: 40)
             .background(Color("filterBackgroundColor"))
             .cornerRadius(8)
         }
