@@ -6,25 +6,95 @@
 //
 
 import XCTest
+@testable import Pokemon
 
 final class PokemonDetailRepositoryTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+   
+    var detailRepository: IPokemonDetailRepository!
+    var mockNetworkManager: MockNetworkManager!
+
+       override func setUpWithError() throws {
+      
+       }
+
+       override func tearDownWithError() throws {
+           detailRepository = nil
+           mockNetworkManager = nil
+       }
+
+       // Test case 1: Successful network request for Pokemon detail
+       func testFetchPokemonDetail_Success() async throws {
+           // Arrange
+           let happyNetworkManager = MockHappyNetworkManager()
+           happyNetworkManager.response = PokemonDetailMockData.pokemonDetailResponse
+           detailRepository = PokemonDetailRepositoryImpl(networkManager: happyNetworkManager)
+
+           // Act
+           let fetchedPokemonDetail = try await detailRepository.fetchPokemonDetail(for: "1")
+
+           // Assert
+           XCTAssertEqual(fetchedPokemonDetail.name, "venusaur")
+       }
+
+       // Test case 2: Successful network request for Pokemon description
+       func testFetchPokemonDescription_Success() async throws {
+           // Arrange
+           let happyNetworkManager = MockHappyNetworkManager()
+           happyNetworkManager.response = PokemonDescMockData.pokemonDescResponse
+           detailRepository = PokemonDetailRepositoryImpl(networkManager: happyNetworkManager)
+
+           // Act
+           let fetchedDescription = try await detailRepository.fetchPokemonDescription(for: 25)
+
+           // Assert
+           XCTAssertEqual(fetchedDescription.id, 1)
+       }
+
+       // Test case 3: Successful network request for Pokemon weakness
+       func testFetchPokemonWeakness_Success() async throws {
+           // Arrange
+           let happyNetworkManager = MockHappyNetworkManager()
+           happyNetworkManager.response = PokemonWeaknessMockData.pokemonWeaknessResponse
+           detailRepository = PokemonDetailRepositoryImpl(networkManager: happyNetworkManager)
+
+           // Act
+           let fetchedWeakness = try await detailRepository.fetchPokemonWeakness(for: 4)
+
+           // Assert
+           XCTAssertEqual(fetchedWeakness.name, "normal")
+       }
+    
+    // Test case 4: Successful network request for Pokemon Evolution
+    func testFetchPokemonEvolution_Success() async throws {
+        // Arrange
+        let happyNetworkManager = MockHappyNetworkManager()
+        happyNetworkManager.response = PokemonEvolutionMockData.pokemonEvolutionResponse
+        detailRepository = PokemonDetailRepositoryImpl(networkManager: happyNetworkManager)
+
+        // Act
+        let fetchedData = try await detailRepository.fetchPokemonEvolutionChain(for: "")
+
+        // Assert
+        XCTAssertEqual(fetchedData.chain.species.name, "bulbasaur")
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+       // Test case 5: Network failure with an error
+       func testFetchPokemonDetail_Failure() async throws {
+           // Arrange
+           let sadNetworkManager = MockSadNetworkManager()
+           sadNetworkManager.error = NetworkError.invalidResponse
+           detailRepository = PokemonDetailRepositoryImpl(networkManager: sadNetworkManager)
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
+           // Act & Assert
+           do {
+               _ = try await detailRepository.fetchPokemonDetail(for: "charizard")
+               XCTFail("Expected an error, but the request succeeded.")
+           } catch {
+               XCTAssertTrue(error is NetworkError)
+           }
+       }
+  
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {

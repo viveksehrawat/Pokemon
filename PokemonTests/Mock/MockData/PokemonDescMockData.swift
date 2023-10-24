@@ -25,7 +25,7 @@ class PokemonDescMockData {
     }
     
     static var pokemonDescData: Data {
-        JsonReader.loadJsonData("PokemonDescription")
+        JsonReader.loadJsonData("PokemonDesc")
     }
 
 }
