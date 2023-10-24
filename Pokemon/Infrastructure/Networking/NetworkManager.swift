@@ -31,7 +31,7 @@ class NetworkManager: INetworkManager{
         guard let urlRequest = try? requestGenerator.createURLRequest(using: request) else {
             throw NetworkError.invalidRequest
         }
-//        print("URL =========== \(urlRequest.url)")
+        print("URL =========== \(urlRequest.url)")
         let (data, response) = try await session.data(for: urlRequest)
         
         guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else {

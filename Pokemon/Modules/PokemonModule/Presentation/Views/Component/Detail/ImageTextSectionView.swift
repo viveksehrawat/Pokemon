@@ -19,7 +19,7 @@ struct ImageTextSectionView: View {
             KFImage(URL(string: pokemonDetailVM.pokemonDetail?.imageUrl ?? ""))
                 .resizable()
                 .scaledToFit()
-                .frame(height: 250)
+                .frame(height: 200)
                 .background(
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
@@ -29,10 +29,11 @@ struct ImageTextSectionView: View {
             Spacer(minLength: 10)
             Text(pokemonDetailVM.description)
                 .font(.system(size: 18))
+                .setForegroundColor()
                 .lineLimit(10)
 
         }
-        .frame(height: 250)
+        .frame(height: 200)
     }
 }
 

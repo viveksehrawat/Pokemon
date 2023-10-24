@@ -8,11 +8,10 @@
 import SwiftUI
 
 
-
-extension Color {
+extension PokemonType {
+    var color: Color {
     
-    static func pokemon(type: PokemonType) -> Color {
-        switch type {
+        switch self {
         case .normal:
             return  Color(hex: "#DDCBD0")
         case .fighting:

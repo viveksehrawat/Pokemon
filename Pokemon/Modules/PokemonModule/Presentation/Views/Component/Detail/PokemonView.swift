@@ -34,7 +34,7 @@ struct PokemonView: View {
                 HeaderView(dismiss: {
                     dismiss()
                 }, title: detail.pokemonDetail?.name.uppercased() ?? "", number: String(format: "%03d", detail.pokemonDetail?.id ?? 0))
-//                ImageTextSectionView()
+                ImageTextSectionView()
                 Spacer(minLength: 30)
 //                HStack{
 //                    ItemView(title: "Height", subTitle: vm.height)

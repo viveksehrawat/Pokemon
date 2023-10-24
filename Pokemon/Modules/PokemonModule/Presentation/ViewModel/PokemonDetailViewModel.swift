@@ -7,10 +7,11 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 class PokemonDetailData {
      var pokemonDetail: PokemonDetail?
-//     var pokemonDescription: PokemonDescription?
+     var pokemonDescription: PokemonDescription?
 //     var pokemonWeakness: PokemonWeakness?
 //     var pokemonEvolutionChain: EvolutionChain?
 //     var detailImage: UIImage =  UIImage()
@@ -75,17 +76,19 @@ class PokemonDetailViewModel: LoadableObject{
             do {
                 
                 let pokDetail = try await getPokemonDetail(for: currentName)
-                pokemonDetail = pokDetail
-//                let pokDesc = try await useCase.fetchPokemonDescription(for: currentIndex)
+                let pokDesc = try await getPokemonDescription(id: currentPageIndex + 1)
 //                let pokWeakness = try await useCase.fetchPokemonWeakness(for: currentIndex)
 //                let pokEvolutionChain = try await useCase.fetchPokemonEvolutionCahin(for: pokDesc.evolutionChain.url )
-//                pokemonDescription = pokDesc
+                
+                pokemonDetail = pokDetail
+                pokemonDescription = pokDesc
 //                pokemonWeakness = pokWeakness
 //                pokemonEvolutionChain = pokEvolutionChain
 //                
 //                await getEvolutionChainPokemonDetails()
 
                 pageData.pokemonDetail = pokDetail
+                pageData.pokemonDescription = pokDesc
                 state = .loaded(pageData)
                 
             } catch {
@@ -96,11 +99,11 @@ class PokemonDetailViewModel: LoadableObject{
     }
     
     func getPokemonDetail(for name: String) async throws -> PokemonDetail{
-        return try await self.useCase.fetchPokemonDetail(for: currentName)
+         try await self.useCase.fetchPokemonDetail(for: currentName)
     }
     
-    func getPokemonDescription() async throws -> PokemonDescription{
-        return try await self.useCase.fetchPokemonDescription(for: currentPageIndex)
+    func getPokemonDescription(id: Int) async throws -> PokemonDescription{
+         try await self.useCase.fetchPokemonDescription(for: id)
     }
     
     var description: String {
@@ -136,6 +139,10 @@ class PokemonDetailViewModel: LoadableObject{
     
     var typeNames: [String] {
         pokemonDetail?.types.map {$0.rawValue} ?? []
+    }
+    
+    var colors: [Color] {
+        pokemonDetail?.types.map {$0.color} ?? []
     }
     
     var abilities: String {
