@@ -31,10 +31,14 @@ struct PokemonView: View {
 
             ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 30){
+                
                 HeaderView(dismiss: {
                     dismiss()
                 }, title: detail.pokemonDetail?.name.uppercased() ?? "", number: String(format: "%03d", detail.pokemonDetail?.id ?? 0))
-                ImageTextSectionView()
+                if let pokemonDetail = detail.pokemonDetail {
+                    ImageTextSectionView(description: detail.description, pokemon: pokemonDetail)
+                }
+                
                 GeneralPropertyView()
                 StatsView(statItems: detail.getStatItems())
                 EvolutionChainView(evolutionChainDetails: vm.pageData.evolutionChainDetails)

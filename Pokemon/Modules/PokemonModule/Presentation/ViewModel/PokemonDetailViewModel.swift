@@ -119,7 +119,7 @@ class PokemonDetailViewModel: LoadableObject{
                 }
                 
                 pageData.evolutionChainPokemonDetails.forEach({ detail in
-                    pageData.evolutionChainDetails.append(EvolutionChainDetail(id: detail.id, imageUrl: detail.imageUrl))
+                    pageData.evolutionChainDetails.append(EvolutionChainDetail(id: detail.id, imageUrl: detail.imageUrl, colors: detail.types.map({$0.color})))
                 })
             }
         } catch {

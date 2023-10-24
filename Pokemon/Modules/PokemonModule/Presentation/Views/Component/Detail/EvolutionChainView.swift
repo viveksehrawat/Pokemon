@@ -11,11 +11,19 @@ import Kingfisher
 struct EvolutionChainDetail: Hashable, Identifiable {
     var id: Int
     var imageUrl: String
+    var colors: [Color]
+
 }
 
 struct EvolutionChainView: View {
     
     var evolutionChainDetails: [EvolutionChainDetail]
+    
+//    private var gradientColors: [Color] {
+//        let types = pokemon.types
+//        let name = types.map {$0.color}
+//        return name
+//    }
 
     var body: some View {
         
@@ -37,7 +45,8 @@ struct EvolutionChainView: View {
                             .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
                             .foregroundColor(.black)
                     )
-                    .background(Color("cellBackground"))
+                    .addGradient(colors: detail.colors)
+                    .cornerRadius(12)
                     if evolutionChainDetails.count > 1 && detail.id != evolutionChainDetails.last?.id {
                         Image(systemName: "arrow.right")
                             .foregroundColor(.black)

@@ -9,25 +9,33 @@ import SwiftUI
 import Kingfisher
 
 struct ImageTextSectionView: View {
-    @EnvironmentObject var vm: PokemonDetailViewModel
 
+    let description: String
+    let pokemon: PokemonDetail
+
+    private var gradientColors: [Color] {
+        let types = pokemon.types
+        let name = types.map {$0.color}
+        return name
+    }
+    
     var body: some View {
         HStack{
-            //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png
-
-//            let s = print(pokemonDetailVM.pokemonDetail.imageUrl)
-            KFImage(URL(string: vm.pageData.pokemonDetail?.imageUrl ?? ""))
+            
+            KFImage(URL(string: pokemon.imageUrl))
                 .resizable()
                 .scaledToFit()
                 .frame(height: 200)
                 .background(
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 12)
                         .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
                         .foregroundColor(.black)
                 )
-                    .padding(.leading,1)
+                .addGradient(colors: gradientColors)
+                .cornerRadius(12)
+            
             Spacer(minLength: 10)
-            Text(vm.pageData.description)
+            Text(description)
                 .font(.system(size: 18))
                 .setForegroundColor()
                 .lineLimit(10)
@@ -36,6 +44,6 @@ struct ImageTextSectionView: View {
     }
 }
 
-#Preview {
-    ImageTextSectionView()
-}
+//#Preview {
+//    ImageTextSectionView()
+//}

@@ -31,29 +31,6 @@ struct PokemonCellView: View {
         let name = types.map {$0.color}
         return name
     }
-    
-//    var new: some View {
-//        
-//        VStack {
-//            AsyncImage(url: URL(string: (pokemon.imageUrl ?? true) ? "" : pokemon.species.url)) { image in
-//                
-//                VStack {
-//                    image
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                    
-//                    Text(pokemon.name)
-//                        .fontWeight(.bold)
-//                        .foregroundColor(.black)
-//                    Spacer()
-//                }
-//            } placeholder: {
-//                ProgressView()
-//            }
-//            .addGradient(colors: gradientColors)
-//        }
-//    }
-
 
     var body: some View {
 
