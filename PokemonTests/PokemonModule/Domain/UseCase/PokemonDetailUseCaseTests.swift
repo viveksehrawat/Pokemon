@@ -70,6 +70,9 @@ class PokemonDetailUseCaseTests: XCTestCase {
     func test_pokemon_detail_name() async throws {
         let expectedPokemonDetailName = "venusaur"
         
+        let expectedPokemonDetail = PokemonDetailMockData.domainPokemonDetail
+        mockPokemonDetailRepository.detail = expectedPokemonDetail
+        
         let result =  try await pokemonDetailUseCase.fetchPokemonDetail(for: "testName")
         XCTAssertEqual(result.name, expectedPokemonDetailName)
     }
