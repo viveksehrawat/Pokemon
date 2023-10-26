@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-
-
-
 struct PokemonView: View {
     
     @EnvironmentObject var vm: PokemonDetailViewModel

@@ -11,6 +11,10 @@ import Foundation
 
 class PokemonListMockData {
     
+    static var pokemonPage: PokemonPage {
+        pokemonResponse.toDomain()
+    }
+    
     static var pokemons: [PokemonDTO] {
         pokemonResponse.results
     }
